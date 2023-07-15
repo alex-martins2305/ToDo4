@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Preloader -->
+<div id="preloader">
+    
+</div>
+
+<!-- ##### Contact Form Area Start ##### -->
+    <center>
+    <div >
+        <h2>Login</h2> 
+            <div></div>
+
+         
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                            <label for="email"><b>Nome ou email</b></label>
+                                <input style="width:200px" type="text" id="email" class="form-control" name="email_user" placeholder="Entre com o email cadastrado">
+                            </div>
+                            <p>
+                                <div class="col-12 col-lg-12">
+                                <label for="senha"><b>Senha</b></label>
+                                <input id="password" type="password" style="width: 200px; text-align: center;" class="form-control" name="password" placeholder="Digite aqui sua senha">
+                            </p>
+                            
+                            </div>
+                            <div class="col-12 text-center" style="margin-top:1cm">
+                                <button class="btn btn-success" type="submit">Acessar sua conta</button>
+                                <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</center>
+
+<script>
+function exibirCriarConta()
+{
+     location.href = "";
+} 
+</script>
+
+
+{% endblock %}
