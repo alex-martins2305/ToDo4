@@ -5,8 +5,8 @@ from ToDo4 import settings
 
 def login(request):
     print("Base dir2 = ", settings.BASE_DIR2)
-    print("STATICFILES_DIRS = ", settings.STATICFILES_DIRS)
-    #print("STATIC_FILES = ", settings.STATICFILES_DIRS)
+    print("STATIC_ROOT = ", settings.STATIC_ROOT)
+    print("STATIC_FILES = ", settings.STATICFILES_DIRS)
     
     print("STATIC_URL = ", settings.STATIC_URL)
 

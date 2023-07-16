@@ -5,6 +5,7 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR2=Path(__file__).resolve().parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -116,13 +117,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# with this commnad django can know that you have created a folder named static
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'ToDo4/static')
-]
+# the next row say to django where look for static files in the folder you created before.
+# in dev static files will be storaged in here.
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ToDo4/static/')]
+
+#the next command say to djando where save static files when run collectstatic.
+STATIC_ROOT=os.path.join(BASE_DIR, 'static/')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

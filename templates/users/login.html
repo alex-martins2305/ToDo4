@@ -2,47 +2,46 @@
 {% load static %}
 {% block content %}
 <!-- Preloader -->
-<div id="preloader">
-    
-</div>
 
-<!-- ##### Contact Form Area Start ##### -->
-    <center>
-    <div >
-        <h2>Login</h2> 
-            <div></div>
+        <div class="contem_login" >
+            <h2 class="col-12 text-center">
+                <div class="label_login">Login</div>
+            </h2> 
 
-         
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-12 col-lg-12">
-                            <label for="email"><b>Nome ou email</b></label>
-                                <input style="text-align: center; width:200px" type="text" id="email" class="form-control" name="email_user" placeholder="Nome ou email">
-                            </div>
-                            <p>
+            <div class="row">
+                <div class="col-12 text-center">   
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
                                 <div class="col-12 col-lg-12">
-                                <label for="senha"><b>Senha</b></label>
-                                <input id="password" type="password" style="width: 200px; text-align: center;" class="form-control" name="password" placeholder="Digite aqui sua senha">
-                            </p>
-                            
+                                    <label for="email"><b>Nome ou email</b></label>
+                                </div>
+                                <div class="col-12 col-lg-12">
+                                    <input style="text-align: center; width:200px" type="text" id="email" name="email_user" placeholder="Nome ou email">
+                                </div>
+                                <div class="col-12 col-lg-12">
+                                    <label for="senha"><b>Senha</b></label>
+                                </div >
+                                <div class="col-12 col-lg-12">
+                                    <input id="password" type="password" style="width: 200px; text-align: center;" name="password" placeholder="Digite aqui sua senha">
+                                </div>
+                                    
+                                
+                                
+                                </div>
+                                <div class="col-12 text-center" style="margin-top:1cm">
+                                    <button class="btn btn-success" type="submit">Acessar sua conta</button>
+                                    <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
+                                </div>
+                                
                             </div>
-                            <div class="col-12 text-center" style="margin-top:1cm">
-                                <button class="btn btn-success" type="submit">Acessar sua conta</button>
-                                <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
-                            </div>
-                            
-                        </div>
-                    </form>
+                        </form>
+                
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</center>
+
+    
 
 <script>
 function exibirCriarConta()
@@ -50,6 +49,5 @@ function exibirCriarConta()
      location.href = "";
 } 
 </script>
-
 
 {% endblock %}
