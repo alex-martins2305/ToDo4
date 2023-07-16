@@ -38,8 +38,7 @@ def login(request):
         else:
             return render(request, 'users/login.html')
         
-def dashboard(request):
-    if request.user.is_authenticated:
-        return render(request, 'users/dashboard.html' )
-    else:
-        return redirect ('login')
+def logout(request):
+    print ('logout')
+    auth.logout(request)
+    return redirect('login')
