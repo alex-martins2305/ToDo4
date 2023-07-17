@@ -5,9 +5,10 @@
 
         <div class="contem_login" >
             <h2 class="col-12 text-center">
+                {% include 'partials/_alerts.html'%}
                 <div class="label_login">Login</div>
             </h2> 
-
+          
             <div class="row">
                 <div class="col-12 text-center">   
                         <form action="{% url 'login' %}" method="POST">
