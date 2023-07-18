@@ -9,16 +9,16 @@ def dashboard(request):
     if request.user.is_authenticated:
         id = request.user.id
 
-        Tasks_atrasadas1=Task.objects.filter(need_init_at__lt=date.today(), pessoa=id).values().order_by('-created_at') 
-        Tasks_atrasadas=Tasks_atrasadas1.filter(etapas='não iniciada')|Tasks_atrasadas1.filter(etapas='iniciada')
+        Tasks_atrasadas=Task.objects.filter(need_init_at__lt=date.today(), pessoa=id).values().order_by('-created_at') 
+        #Tasks_atrasadas=Tasks_atrasadas1.filter(etapas='não iniciada')|Tasks_atrasadas1.filter(etapas='iniciada')
 
-        TasksDoDia1=Task.objects.filter(need_init_at__exact=date.today(), pessoa=id ).values().order_by('-created_at')
-        TasksDoDia=TasksDoDia1.filter(etapas='iniciada')|TasksDoDia1.filter(etapas='não iniciada')
+        TasksDoDia=Task.objects.filter(need_init_at__exact=date.today(), pessoa=id ).values().order_by('-created_at')
+        #TasksDoDia=TasksDoDia1.filter(etapas='iniciada')|TasksDoDia1.filter(etapas='não iniciada')
         
-        Tasks_futuras1=Task.objects.filter(need_init_at__gt=date.today(), pessoa=id ).values().order_by('-created_at')
-        Tasks_futuras=Tasks_futuras1.filter(etapas='não iniciada')|Tasks_futuras1.filter(etapas='iniciada')
+        Tasks_futuras=Task.objects.filter(need_init_at__gt=date.today(), pessoa=id ).values().order_by('-created_at')
+        #Tasks_futuras=Tasks_futuras1.filter(etapas='não iniciada')|Tasks_futuras1.filter(etapas='iniciada')
 
-        return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'tasks_futuras':Tasks_futuras} )
+        return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras} )
     else:
         return redirect ('login')
 

@@ -1,16 +1,11 @@
-from django.contrib import admin    
-from tasks.models import Task
+from django.contrib import admin
+from .models import Task
 
-admin.site.register(Task)
-class TaskAdmin(admin.ModelAdmin):
-    list_display = [
-        "__str__",
-        "id",
-        "status",
-        "need_init_at",
-        "start_at",
-        "finished_at",
-        "update_at",
-    ]
-    list_filter = ["titulo", "descricao", "need_init_at"]
-    search_fields = ["titulo", "descricao"]
+class ListandoTasks(admin.ModelAdmin):
+    list_display =('id', 'titulo', 'etapas', 'need_init_at')
+    list_display_links=('id','etapas' )
+    search_fields=('titulo',)
+    list_filter=('pessoa',)
+    list_per_page=20
+
+admin.site.register(Task, ListandoTasks)
