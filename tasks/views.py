@@ -24,5 +24,29 @@ def dashboard(request):
 
 def taskview(request,task_id):
     task_clicada=get_object_or_404(Task, pk=task_id)
-    print(task_clicada)
     return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
+
+def initFinishTask(request):
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+        print(taskId)
+    task_clicada=get_object_or_404(Task, pk=taskId)
+    if task_clicada.etapas=='' or task_clicada.etapas=='não iniciada' or task_clicada.etapas=='adiada':
+        task_clicada.etapas='iniciada'
+        task_clicada.save()
+        print(task_clicada.etapas,2)
+    else:
+        if task_clicada.etapas=='iniciada':
+            task_clicada.etapas='finalizada'
+            task_clicada.save()
+    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
+    
+
+def saveTaskObs(resquest):
+    pass
+
+def JustificyTask(request):
+    pass
+
+def postponeTask(request):
+    pass

@@ -9,28 +9,70 @@
 <h3>{{task.status}}</h3>
 
 <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
-    <form>
-        <input value={{task.id}}>
+    <form action="{% url 'initFinishTask' %}" method="POST">
+        {% csrf_token %}
+        <input value={{task.id}} name="task_id">
         <div>
-            {% if tasks.etapas == "não iniciada" %}
+            {% if task.etapas == "não iniciada" %}
                 <button class="btn btn-success" type="submit">INICIAR</button> 
-                <button class="btn btn-warning" type="submit">ADIAR</button>
-            {% else %}
-                <button class="btn btn-primary" type="submit">FINALIZAR</button>             
-            {% endif %}
                 <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
-        </div>
-        <div>
-            {% if not tasks.etapas == "não iniciada" %}
-                <div>
-                    <textarea>{{tasks.obs}}</textarea>
-                </div>
-                <div>
-                    <button class="btn btn-Secondary" type="submit">SALVAR</button> 
-                </div>
-            {% endif %}
-        </div>
-    </form>
-</tr>
 
+            {% else %}
+                {% if task.etapas == "iniciada" %}
+                    <button class="btn btn-primary" type="submit">FINALIZAR</button>
+                    <button class="btn btn-warning" type="submit">ADIAR</button>  
+                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                    <div>
+                        <form  action="" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id">
+                            <div>
+                                <textarea>{{task.obs}}</textarea>
+                            </div>
+                            <div>
+                                <button class="btn btn-Secondary" type="submit">SALVAR</button> 
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    {% if task.etapas == "finalizada" %}
+                        <div>Tarefa finalizada em {{task.finished_at}}</div>
+                        <div>{{task.obs}}</div>
+                        {% else %}
+                            {% if task.etapas == "justificada" %}
+                                <button class="btn btn-warning" type="submit">ADIAR</button>  
+                                <div>
+                                    <form  action="" method="POST">
+                                        {% csrf_token %}
+                                        <input value={{task.id}} name="task_id">
+                                        <div>
+                                            <textarea>{{task.obs}}</textarea>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-Secondary" type="submit">SALVAR</button> 
+                                        </div>
+                                    </form>
+                                </div>
+                            {% else %}
+                                {% if task.etapas == 'adiada' %}
+                                    <button class="btn btn-success" type="submit">REINICIAR</button>
+                                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                                    <div>
+                                        <form  action="" method="POST">
+                                            {% csrf_token %}
+                                            <input value={{task.id}} name="task_id">
+                                            <div>
+                                                <textarea>{{task.obs}}</textarea>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-Secondary" type="submit">SALVAR</button> 
+                                            </div>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+                    
 {% endblock%}
