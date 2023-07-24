@@ -1,0 +1,12 @@
+<div>
+    <form  action="{% url 'saveTaskObs' %}" method="POST">
+        {% csrf_token %}
+        <input value={{task.id}} name="task_id" type="hidden">
+        <div>
+            <textarea name="obsText">{{task.obs}}</textarea>
+        </div>
+        <div>
+            <button class="btn btn-Secondary" type="submit">SALVAR</button> 
+        </div>
+    </form>
+</div>

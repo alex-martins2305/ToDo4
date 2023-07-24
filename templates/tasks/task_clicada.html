@@ -9,19 +9,37 @@
 <h3>{{task.status}}</h3>
 
 <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
-    <form action="{% url 'initFinishTask' %}" method="POST">
-        {% csrf_token %}
-        <input value={{task.id}} name="task_id">
+ 
         <div>
             {% if task.etapas == "não iniciada" %}
-                <button class="btn btn-success" type="submit">INICIAR</button> 
-                <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
-
+                <form action="{% url 'initFinishTask' %}" method="POST">
+                    {% csrf_token %}
+                    <input value={{task.id}} name="task_id">
+                    <button class="btn btn-success" type="submit">INICIAR</button>
+                </form>
+                <form action="{% url 'justifyTask' %}" method="POST"> 
+                    {% csrf_token %}
+                    <input value={{task.id}} name="task_id">
+                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                </form>
+              
             {% else %}
                 {% if task.etapas == "iniciada" %}
-                    <button class="btn btn-primary" type="submit">FINALIZAR</button>
-                    <button class="btn btn-warning" type="submit">ADIAR</button>  
-                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                    <form>
+                        {% csrf_token %}
+                        <input value={{task.id}} name="task_id">
+                        <button class="btn btn-primary" type="submit">FINALIZAR</button>
+                    </form>
+                    <form>
+                        {% csrf_token %}
+                        <input value={{task.id}} name="task_id">
+                        <button class="btn btn-warning" type="submit">ADIAR</button>  
+                    </form>
+                    <form action="{% url 'justifyTask' %}" method="POST"> 
+                        {% csrf_token %}
+                        <input value={{task.id}} name="task_id">
+                        <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                    </form>
                     <div>
                         <form  action="" method="POST">
                             {% csrf_token %}
@@ -40,7 +58,16 @@
                         <div>{{task.obs}}</div>
                         {% else %}
                             {% if task.etapas == "justificada" %}
-                                <button class="btn btn-warning" type="submit">ADIAR</button>  
+                                <form action="{% url 'initFinishTask' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input value={{task.id}} name="task_id">
+                                    <button class="btn btn-success" type="submit">REINICIAR</button>  
+                                </form>     
+                                <form>
+                                    {% csrf_token %}
+                                    <button class="btn btn-warning" type="submit">ADIAR</button>  
+                                    <input value={{task.id}} name="task_id">
+                                </form>     
                                 <div>
                                     <form  action="" method="POST">
                                         {% csrf_token %}
@@ -55,8 +82,16 @@
                                 </div>
                             {% else %}
                                 {% if task.etapas == 'adiada' %}
-                                    <button class="btn btn-success" type="submit">REINICIAR</button>
-                                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                                    <form action="{% url 'initFinishTask' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input value={{task.id}} name="task_id">
+                                        <button class="btn btn-success" type="submit">REINICIAR</button>
+                                    </form>
+                                    <form action="{% url 'justifyTask' %}" method="POST"> 
+                                        {% csrf_token %}
+                                        <input value={{task.id}} name="task_id">
+                                        <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                                    </form>
                                     <div>
                                         <form  action="" method="POST">
                                             {% csrf_token %}
@@ -73,6 +108,5 @@
                             {% endif %}
                     {% endif %}
                 {% endif %}
-            {% endif %}
-                    
+            {% endif %}       
 {% endblock%}

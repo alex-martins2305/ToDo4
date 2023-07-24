@@ -24,29 +24,48 @@ def dashboard(request):
 
 def taskview(request,task_id):
     task_clicada=get_object_or_404(Task, pk=task_id)
-    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
+    return render(request, 'tasks/task_clicada2.html', {'task':task_clicada})
 
-def initFinishTask(request):
+def initTask(request):
     if request.method == 'POST':
         taskId=request.POST['task_id']
-        print(taskId)
-    task_clicada=get_object_or_404(Task, pk=taskId)
-    if task_clicada.etapas=='' or task_clicada.etapas=='não iniciada' or task_clicada.etapas=='adiada':
-        task_clicada.etapas='iniciada'
-        task_clicada.save()
-        print(task_clicada.etapas,2)
-    else:
-        if task_clicada.etapas=='iniciada':
-            task_clicada.etapas='finalizada'
-            task_clicada.save()
-    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
-    
+    task_clicada=get_object_or_404(Task, pk=taskId)  
+    task_clicada.etapas='iniciada'
+    task_clicada.start_at=date.today()
+    task_clicada.save()
+    return render(request, 'tasks/task_clicada2.html', {'task':task_clicada})
 
-def saveTaskObs(resquest):
-    pass
+def finishTask(request):  
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+    task_clicada=get_object_or_404(Task, pk=taskId)  
+    task_clicada.etapas='finalizada'
+    task_clicada.finished_at=date.today()
+    task_clicada.save()
+    return render(request, 'tasks/task_clicada2.html', {'task':task_clicada})
+
+def saveTaskObs(request):
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+        obsText=request.POST['obsText']
+    task_clicada=get_object_or_404(Task, pk=taskId)  
+    task_clicada.obs=obsText
+    if task_clicada.etapas=='quase_justificada':
+        task_clicada.etapas='jusfificada'
+    task_clicada.save()
+    return render(request, 'tasks/task_clicada2.html', {'task':task_clicada})
 
 def JustificyTask(request):
-    pass
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+    task_clicada=get_object_or_404(Task, pk=taskId)
+    if task_clicada.obs=="":
+        task_clicada.etapas='quase_justificada'
+    else:
+        task_clicada.etapas='justificada'
+        task_clicada.update_at=date.today()
+    task_clicada.save()
+    return render(request, 'tasks/task_clicada2.html', {'task':task_clicada})
 
 def postponeTask(request):
     pass
