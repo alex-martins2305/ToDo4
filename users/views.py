@@ -4,12 +4,6 @@ from django.contrib import auth, messages
 from ToDo4 import settings
 
 def login(request):
-    print("Base dir2 = ", settings.BASE_DIR2)
-    print("STATICFILES_DIRS = ", settings.STATICFILES_DIRS)
-    #print("STATIC_FILES = ", settings.STATICFILES_DIRS)
-    
-    print("STATIC_URL = ", settings.STATIC_URL)
-
     if request.user.is_authenticated:
         return redirect ('dashboard')
     else:
@@ -42,3 +36,36 @@ def logout(request):
     print ('logout')
     auth.logout(request)
     return redirect('login')
+
+def signup (request):
+    if request.method == 'POST':
+        nome = request.POST['name']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        if nome!="" and email!="":
+            if email.count('@')==1:
+                if len(password1)>=6:
+                    if password1==password2:
+                        if User.objects.filter(email=email).exists() or User.objects.filter(username=nome).exists():
+                            messages.error(request, 'Já existe um usuário cadastrado com esse nome ou com esse email.')
+                            return render (request, 'users/signup.html')
+                        else:
+                            user=User.objects.create_user(username=nome, email=email, password=password1)
+                            user.save()
+                            auth.login(request, user)
+                            return redirect('dashboard')
+                    else:
+                        messages.error(request, 'Suas senhas devem ser iguais')
+                        return render (request, 'users/signup.html')
+                else:
+                    messages.error(request, 'Sua senha deve ter no mínimo 6 caracteres.')
+                    return render (request, 'users/signup.html')
+            else:
+                messages.error(request, 'Digite um email válido.')
+                return render (request, 'users/signup.html')
+        else:
+            messages.error(request, 'Nome e email não podem ser vazios')
+            return render (request, 'users/signup.html')
+    else:
+        return render (request, 'users/signup.html')

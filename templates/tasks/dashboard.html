@@ -4,52 +4,146 @@
 {% block content%}
 
 <center>
-<h2>Dashboard</h2> 
-<a  href="{% url 'logout' %}" >Logout</a>
 
-        <h2 >Tarefas</h2>
+<a  href="{% url 'logout' %}" >Logout</a>
+<h5>{{user.username}}</h5>
+
+<div style="max-width: 180px;">
+    {% if dashboards %}
+        <form  action="{% url 'dashboard' %}" method="POST">
+            dashboard teste
+    {% elif atrasadas %}
+        <form  action="{% url 'tasksAtrasadas' %}" method="POST"> 
+            atrasadas teste  
+    {% elif dodia %}
+        <form  action="{% url 'tasksDoDia' %}" method="POST"> 
+            dodia teste     
+    {% elif futuras %}
+        <form  action="{% url 'tasksFuturas' %}" method="POST"> 
+            futuras teste     
+    {% elif finalizadas %}
+        <form  action="{% url 'tasksFinalizadas' %}" method="POST"> 
+            finalizadas teste     
+    {% elif justificadas %}
+        <form  action="{% url 'tasksJustificadas' %}" method="POST"> 
+            justificadas teste     
+    {%endif%}
+
+        {% csrf_token %}
+            {% if user.is_superuser %}
+                <div style="display: inline-block;"></div>
+                    <b>Filtre por usuário:</b>
+                    <select name="user" class="form-control">
+                            <option></option> 
+                        {% for pessoa in usuarios %}
+                            <option>{{pessoa}}</option> 
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="display: inline-block;">
+                    <button type="submit" class="btn btn-primary">Filtrar</a>
+                </div>
+            {% endif %}
+                
+    </form>
+</div>
+
+        <h3><a href="{% url 'newtask' %}" type="button" class="btn btn-success">Nova tarefa</a></h3>
         <ul class="task-list">
             <table>
                 {% for tasks in Tasks_atrasadas %}
                         <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
                             <td style="width: 360px">
-                                <a style="padding-right: 30%; color:red;" href="task/{{tasks.id}}">{{tasks.titulo}}</a>
+                                <a style="padding-right: 30%; color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
                             </td>
                             <td style="width: 420px;">
-                                <a style="margin-right: 17%; color:red;" href="task/{{tasks.id}}">{{tasks.need_init_at}}</a>
+                                <a style="margin-right: 17%; color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
                             </td>
                             <td style="width: 30%;">
-                                <a style="color:red;" href="task/{{tasks.id}}">{{tasks.etapas}}</a>
+                                <a style="color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                             </td>
+                            {% if user.is_superuser %}
+                                <td style="width: 10%;">
+                                    <a style="color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                                </td>
+                            {% endif %}
                         </tr>
                 {% endfor %}
             
             {% for tasks in TasksDoDia %}
                 <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;">
                     <td style="width: 360px">
-                        <a style="padding-right: 30%; color:green;" href="task/{{tasks.id}}">{{tasks.titulo}}</a>
+                        <a style="padding-right: 30%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
                     </td>
                     <td style="width: 420px;">
-                        <a style="margin-right: 17%; color:green;" href="task/{{tasks.id}}">{{tasks.need_init_at}}</a>
+                        <a style="margin-right: 17%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
                     </td>
                     <td style="width: 30%;">
-                        <a style="color:green;" href="task/{{tasks.id}}">{{tasks.etapas}}</a>
+                        <a style="color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                     </td>
+                    {% if user.is_superuser %}
+                        <td style="width: 10%;">
+                            <a style="color:green;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
                 
             {% for tasks in Tasks_futuras %}
-                    <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
-                        <td style="width: 360px">
-                            <a style=color:blue; href="task/{{tasks.id}}">{{tasks.titulo}}</a>
+                <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
+                    <td style="width: 360px">
+                        <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                    </td>
+                    <td style="width: 420px;">
+                        <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                    </td>
+                    <td style="width: 30%;">
+                        <a style="color:blue; "href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                    </td>
+                    {% if user.is_superuser %}
+                        <td style="width: 10%;">
+                            <a style="color:blue;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                         </td>
-                        <td style="width: 420px;">
-                            <a style=color:blue; href="task/{{tasks.id}}">{{tasks.need_init_at}}</a>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+
+            {% for tasks in Tasks_finalizadas %}
+                <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
+                    <td style="width: 360px">
+                        <a style="padding-right: 30%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                    </td>
+                    <td style="width: 420px;">
+                        <a style="margin-right: 17%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                    </td>
+                    <td style="width: 30%;">
+                        <a style="color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                    </td>
+                    {% if user.is_superuser %}
+                        <td style="width: 10%;">
+                            <a style="color:grey;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                         </td>
-                        <td style="width: 30%;">
-                            <a style="color:blue;" href="task/{{tasks.id}}">{{tasks.etapas}}</a>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+
+            {% for tasks in Tasks_justificadas %}
+                <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
+                    <td style="width: 360px">
+                        <a style="padding-right: 30%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                    </td>
+                    <td style="width: 420px;">
+                        <a style="margin-right: 17%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                    </td>
+                    <td style="width: 30%;">
+                        <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                    </td>
+                    {% if user.is_superuser %}
+                        <td style="width: 10%;">
+                            <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                         </td>
-                    </tr>
+                    {% endif %}
+                </tr>
             {% endfor %}
           
         </table>

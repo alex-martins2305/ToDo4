@@ -5,41 +5,45 @@
 
         <div class="contem_login" >
             <h2 class="col-12 text-center">
-                {% include 'partials/_alerts.html'%}
                 <div class="label_login">Login</div>
+                {% include 'partials/_alerts.html'%}
             </h2> 
-          
-            <div class="row">
-                <div class="col-12 text-center">   
-                        <form action="{% url 'login' %}" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-12 col-lg-12">
-                                    <label for="email"><b>Nome ou email</b></label>
+            <tb>
+                <tr>
+                    <td>
+                        <div class="col-12 text-center">   
+                            <form action="{% url 'login' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12 col-lg-12">
+                                        <label for="email"><b>Nome ou email</b></label>
+                                    </div>
+                                    <div class="col-12 col-lg-12">
+                                        <input style="text-align: center; width:200px" type="text" id="email" name="email_user" placeholder="Nome ou email">
+                                    </div>
+                                    <div class="col-12 col-lg-12">
+                                        <label for="senha"><b>Senha</b></label>
+                                    </div >
+                                    <div class="col-12 col-lg-12">
+                                        <input id="password" type="password" style="width: 200px; text-align: center;" name="password" placeholder="Digite aqui sua senha">
+                                    </div>
+                                    <div class="col-12 text-center" style="margin-top:1cm">
+                                        <button class="btn btn-success" type="submit">Acessar sua conta</button>
+                                    </div>
                                 </div>
-                                <div class="col-12 col-lg-12">
-                                    <input style="text-align: center; width:200px" type="text" id="email" name="email_user" placeholder="Nome ou email">
-                                </div>
-                                <div class="col-12 col-lg-12">
-                                    <label for="senha"><b>Senha</b></label>
-                                </div >
-                                <div class="col-12 col-lg-12">
-                                    <input id="password" type="password" style="width: 200px; text-align: center;" name="password" placeholder="Digite aqui sua senha">
-                                </div>
-                                    
-                                
-                                
-                                </div>
-                                <div class="col-12 text-center" style="margin-top:1cm">
-                                    <button class="btn btn-success" type="submit">Acessar sua conta</button>
-                                    <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Ainda não tem conta? Clique aqui</button>
-                                </div>
-                                
-                            </div>
-                        </form>
-                
-                </div>
-            </div>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-12 text-center">             
+                                <form  action="{% url 'signup' %}">
+                                    <button class="btn btn-primary" type="submit" >Ainda não tem conta? Clique aqui</button>
+                                </form>
+                            </tr>
+                        </div>
+                    </td>
+                </tr>
+            </tb>
         </div>
 
     

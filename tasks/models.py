@@ -15,6 +15,7 @@ class Task(models.Model):
         ('justificada','justificada'),
     )
     pessoa = models.ForeignKey(User, on_delete=models.CASCADE)
+    nome_pessoa=models.CharField(max_length=255, default="")
     titulo=models.CharField(max_length=255)
     descricao=models.TextField()
     status=models.CharField(
@@ -28,7 +29,7 @@ class Task(models.Model):
         default='não iniciada'
         )
     created_at=models.DateField(auto_now_add=True)
-    need_init_at=models.DateField(default='01/01/2023')
+    need_init_at=models.DateField(default='01/01/2023') 
     started=models.BooleanField(default=False)
     start_at=models.DateField(null=True, blank=True)
     finished=models.BooleanField(default=False)

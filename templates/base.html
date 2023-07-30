@@ -14,8 +14,22 @@
     <link rel="stylesheet"  rel='text/css' href="{% static 'ccs/styles.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    
-        <body>
-            <a href="{% url 'dashboard' %}">ToDo</a>
+        <body>  
+            {% if user.is_authenticated %}
+                <div>
+                    <a href="{% url 'dashboard' %}" type="button" class="btn btn-warning">ToDo</a>
+                    <a href="{% url 'tasksDoDia' %}" type="button" class="btn btn-success">TAREFAS DO DIA</a>
+                    <a href="{% url 'tasksFuturas' %}" type="button" class="btn btn-primary">TAREFAS FUTURAS</a>
+                    <a href="{% url 'tasksAtrasadas' %}" type="button" class="btn btn-danger">TAREFAS ATRASADAS</a>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'admin:index' %}" type="button" class="btn btn-primary">Admin</a>
+                    {%else%}
+                    <a href="{% url 'tasksTodas' %}" type="button" class="btn btn-info">TODAS</a>
+                    {%endif%}
+                    <a href="{% url 'tasksFinalizadas' %}" type="button" class="btn btn-outline-danger">TAREFAS FINALIZADAS</a>
+                    <a href="{% url 'tasksJustificadas' %}" type="button" class="btn btn-outline-danger">TAREFAS JUSTIFICADAS</a>
+                </div>
+            {% endif %}
         {% block content %} {%endblock%}
             <!-- jquery -->
             <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Cadastro de Usuário {% endblock %}
+{% block content %}
+<!-- Preloader -->
+
+        <div class="contem_login" >  
+                {% include 'partials/_alerts.html'%}
+        </div>
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+            <div class="col-12 text-center">
+                <h3>Cadastro de Usuário</h3>
+                <div >
+                    <label>Nome</label>
+                    <input name="name" class="formcontrol">
+                </div>
+                <div class="formcontrol">
+                    <label>Email</label>
+                    <input name="email">
+                </div>
+                <div class="formcontrol">
+                    <label>Senha</label>
+                    <input type="password" name="password1">
+                </div>
+                <div class="formcontrol">
+                    <label>Confirme a senha</label>
+                    <input  type="password" name="password2">
+                </div>
+                <div class="formcontrol">
+                    <button class="btn btn-success" type="submit" href="{% url 'signup' %}">Cadastrar</button>
+                </div>
+            </div>  
+        </form>  
+
+{% endblock %}

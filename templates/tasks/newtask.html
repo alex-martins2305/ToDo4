@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %} Lista de Tarefas {% endblock%}    
+{% block content%}
+{% load widget_tweaks %}
+
+<h1>Nova tarefa</h1>
+
+{% include 'partials/_alerts.html'%}
+
+<section class='container col-8'>
+    <form action="#" method='POST'>
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            {% for error in field.errors %}
+                <section class="alert alert-danger" role="alert">
+                    {{field.errors}}
+                </section>
+            {% endfor %}
+            <div class="form-group">
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field |add_class:'form-control'}}
+            </div>
+        {% endfor %}
+           
+        <input type='submit' value="OK" class="btn btn-success">
+    </form>   
+</section> 
+{% endblock%}

@@ -1,112 +1,67 @@
 {% extends 'base.html'%}
 {% load static %}
-{% block title %} Lista de Tarefas {% endblock%}    
+{% block title %} Lista de Tarefas {% endblock%}   
+
 {% block content%}
 
-<h1>Tarefa</h1>
-<h3>{{task.titulo}}</h3>
-<h3>{{task.descricao}}</h3>
-<h3>{{task.status}}</h3>
+    <h1>Tarefa</h1>
+    <h3>{{task.titulo}}</h3>
+    <h3>{{task.descricao}}</h3>
+    <h3>{{task.status}}</h3>
 
-<tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
- 
         <div>
             {% if task.etapas == "não iniciada" %}
-                <form action="{% url 'initFinishTask' %}" method="POST">
+                <form action="{% url 'initTask' %}" method="POST">
                     {% csrf_token %}
-                    <input value={{task.id}} name="task_id">
+                    <input value={{task.id}} name="task_id" type="hidden">
                     <button class="btn btn-success" type="submit">INICIAR</button>
                 </form>
-                <form action="{% url 'justifyTask' %}" method="POST"> 
+                <form action="{% url 'justifyTask' %}" method="POST">
                     {% csrf_token %}
-                    <input value={{task.id}} name="task_id">
-                    <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
+                    <input value={{task.id}} name="task_id" type="hidden">
+                    <button class="btn btn-warning" type="submit">JUSTIFICAR</button>
                 </form>
-              
             {% else %}
                 {% if task.etapas == "iniciada" %}
-                    <form>
-                        {% csrf_token %}
-                        <input value={{task.id}} name="task_id">
-                        <button class="btn btn-primary" type="submit">FINALIZAR</button>
-                    </form>
-                    <form>
-                        {% csrf_token %}
-                        <input value={{task.id}} name="task_id">
-                        <button class="btn btn-warning" type="submit">ADIAR</button>  
-                    </form>
-                    <form action="{% url 'justifyTask' %}" method="POST"> 
-                        {% csrf_token %}
-                        <input value={{task.id}} name="task_id">
-                        <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
-                    </form>
                     <div>
-                        <form  action="" method="POST">
+                        TAREFA INICIADA EM {{task.start_at}}. 
+                        <form action="{% url 'finishTask' %}" method="POST">
                             {% csrf_token %}
-                            <input value={{task.id}} name="task_id">
-                            <div>
-                                <textarea>{{task.obs}}</textarea>
-                            </div>
-                            <div>
-                                <button class="btn btn-Secondary" type="submit">SALVAR</button> 
-                            </div>
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-primary" type="submit">FINALIZAR</button>
+                        </form>
+                        <form action="{% url 'justifyTask' %}" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-warning" type="submit">JUSTIFICAR</button>
                         </form>
                     </div>
+                    {% include 'partials/_obs.html' %}
                 {% else %}
                     {% if task.etapas == "finalizada" %}
-                        <div>Tarefa finalizada em {{task.finished_at}}</div>
-                        <div>{{task.obs}}</div>
-                        {% else %}
-                            {% if task.etapas == "justificada" %}
-                                <form action="{% url 'initFinishTask' %}" method="POST">
-                                    {% csrf_token %}
-                                    <input value={{task.id}} name="task_id">
-                                    <button class="btn btn-success" type="submit">REINICIAR</button>  
-                                </form>     
-                                <form>
-                                    {% csrf_token %}
-                                    <button class="btn btn-warning" type="submit">ADIAR</button>  
-                                    <input value={{task.id}} name="task_id">
-                                </form>     
-                                <div>
-                                    <form  action="" method="POST">
-                                        {% csrf_token %}
-                                        <input value={{task.id}} name="task_id">
-                                        <div>
-                                            <textarea>{{task.obs}}</textarea>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-Secondary" type="submit">SALVAR</button> 
-                                        </div>
-                                    </form>
-                                </div>
-                            {% else %}
-                                {% if task.etapas == 'adiada' %}
-                                    <form action="{% url 'initFinishTask' %}" method="POST">
-                                        {% csrf_token %}
-                                        <input value={{task.id}} name="task_id">
-                                        <button class="btn btn-success" type="submit">REINICIAR</button>
-                                    </form>
-                                    <form action="{% url 'justifyTask' %}" method="POST"> 
-                                        {% csrf_token %}
-                                        <input value={{task.id}} name="task_id">
-                                        <button class="btn btn-Secondary" type="submit">JUSTIFICAR</button> 
-                                    </form>
-                                    <div>
-                                        <form  action="" method="POST">
-                                            {% csrf_token %}
-                                            <input value={{task.id}} name="task_id">
-                                            <div>
-                                                <textarea>{{task.obs}}</textarea>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-Secondary" type="submit">SALVAR</button> 
-                                            </div>
-                                        </form>
-                                    </div>
-                                {% endif %}
+                        <div>
+                            TAREFA INICIADA EM {{task.start_at}} e FINALIZADA EM {{task.finished_at}}
+                        </div>
+                        <div>
+                            {{task.obs}}
+                        </div>
+                    {% else %}
+                        {% if task.etapas == "quase_justificada" %}
+                            {% if not task.obs %}
+                                ATENÇÃO!!! Para finalizar a justificativa digite uma observação e clique em salvar.
+                                {% include 'partials/_obs.html' %}
                             {% endif %}
+                        {% else %}
+                            <div>
+                                TAREFA JUSTIFICADA EM  {{task.update_at}}.
+                            </div>
+                            <div>
+                                {{task.obs}}
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
-            {% endif %}       
-{% endblock%}
+            {% endif %}
+        </div>
+                  
+{% endblock %}

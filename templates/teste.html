@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elemento select separado do formulário</title>
+</head>
+<body>
+    <form action="#" method="post" id="frmCores">
+        <label for="txtNome">Informe o seu nome</label>
+        <input type="text" id="txtNome" name="nome">
+        <input type="button" id="btnEnviar" value="Exibir as informações">
+    </form>
+    <br>
+    <label for="ddlCores">Escolha uma cor</label>
+    <select id="ddlCores" name="cores" form="frmCores">
+        <option value="verde">Verde</option>
+        <option value="amarelo">Amarelo</option>
+        <option value="roxo">Roxo</option>
+        <option value="lilas">Lilás</option>
+    </select>
+    <h2 id="resultado"></h2>  
+    <script>
+        document.getElementById("btnEnviar").onclick = function () {
+            let formCores = document.getElementById('frmCores').elements;
+            document.getElementById("resultado").innerHTML = "Seu nome é " + formCores["nome"].value + " e a cor selecionada é " + formCores["cores"].value;
+         };
+    </script>   
+</body>
+</html>   
