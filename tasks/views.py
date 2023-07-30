@@ -104,17 +104,30 @@ def tasksDoDia(request):
 def tasksFuturas(request):
     if request.user.is_authenticated:
         id = request.user.id
-        titulo="Tarefas Futuras"
-        Tasks_futurasTodas=Task.objects.filter(need_init_at__gt=date.today(), pessoa=id ).values().order_by('-created_at')
-        Tasks_futuras1=Task.objects.filter(need_init_at__gt=date.today(), pessoa=id ).values().order_by('-created_at')
-        Tasks_futuras=Tasks_futuras1.filter(etapas='não iniciada')|Tasks_futuras1.filter(etapas='iniciada')
+
+        titulo="Tarefas futuras"
+
+        choices=create_choices()
+            
         if request.user.is_superuser:
-            choices=create_choices()
-            return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futurasTodas, 'futuras': titulo, 'usuarios':choices} )
+            try:    
+                name = request.POST['user']
+            except:
+                name=""
+            if name!="":
+                Tasks_futurasTodas=Task.objects.filter(need_init_at__exact=date.today(), nome_pessoa=name).values().order_by('-created_at')
+            else:
+                TasksDoDia1=Task.objects.filter(need_init_at__exact=date.today()).values().order_by('-created_at') 
+                TasksDoDiaTodas=TasksDoDia1.filter(etapas='não iniciada')|TasksDoDia1.filter(etapas='iniciada')
+           
+            return render(request, 'tasks/dashboard.html', {'TasksDoDia':TasksDoDiaTodas, 'dodia': titulo,'usuarios':choices } )
         else:
+            Tasks_futuras1=Task.objects.filter(need_init_at__exact=date.today(), pessoa=id).values().order_by('-created_at') 
+            Tasks_futuras=Tasks_futuras1.filter(etapas='não iniciada')|TasksDoDia1.filter(etapas='iniciada')
             return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futuras,'futuras': titulo} )
     else:
         return redirect ('login')
+
     
 def tasksFinalizadas(request):
     if request.user.is_authenticated:
