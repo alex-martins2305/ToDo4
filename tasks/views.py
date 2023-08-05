@@ -3,13 +3,10 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-User = get_user_model()
-users = User.objects.all()
 from datetime import date, datetime
 from .models import Task
 from .forms import newTaskForm, newTaskForm2
-from .refine_tasks import *
-
+from .staff_functions import *
 
 def dashboard(request):
     if request.user.is_authenticated:
@@ -30,9 +27,9 @@ def dashboard(request):
                 Tasks_futurasTodas=tasks_futuras_by_user(name)           
             else:
                 print('bosta')
-                Tasks_atrasadasTodas=all_atrasadas()
-                TasksDoDiaTodas=all_dodia()
-                Tasks_futurasTodas=all_futuras()
+                Tasks_atrasadasTodas=func_all_atrasadas()
+                TasksDoDiaTodas=func_all_dodia()
+                Tasks_futurasTodas=func_all_futuras()
 
             return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'TasksDoDia':TasksDoDiaTodas, 'Tasks_futuras':Tasks_futurasTodas, 'dashboards': titulo, 'usuarios':choices} )
         else:
@@ -183,13 +180,13 @@ def tasksTodas(request):
 
         titulo="Todas as tarefas"
 
-        Tasks_atrasadasTodas=all_atrasadas()
+        Tasks_atrasadasTodas=func_all_atrasadas()
         Tasks_atrasadas=tasks_atrasadas_by_user(name_logado) 
 
-        TasksDoDiaTodas=all_dodia()
+        TasksDoDiaTodas=func_all_dodia()
         TasksDoDia=tasks_dodia_by_user(name_logado)
         
-        Tasks_futurasTodas=all_futuras()
+        Tasks_futurasTodas=func_all_futuras()
         Tasks_futuras=tasks_futuras_by_user(name_logado)
 
         User = get_user_model()
@@ -260,9 +257,6 @@ def JustificyTask(request):
     task_clicada.save()
     return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
 
-def postponeTask(request):
-    pass
-
 def newTask(request):
     if request.user.is_superuser:
         form = newTaskForm(request.POST or None)
@@ -297,14 +291,44 @@ def newTask(request):
     else:
         return render(request, "tasks/newtask.html", {'form':form})
 
-def create_choices():
-    User = get_user_model()
-    users = User.objects.all()
-    choices=[]
-    for user in users:
-        list_element=(user.username)
-        choices.append(list_element)
-    return (choices)
+def search (request):
+    if request.user.is_authenticated:
+        id = request.user.id
+        name_logado=request.user.username
+
+    if request.user.is_superuser:
+        all_atrasadas=func_all_atrasadas()
+        all_dodia=func_all_dodia()
+        all_futuras=func_all_futuras()
+        print('SuperUser selecionada todoas tarefas')
+    else:
+        all_atrasadas=tasks_atrasadas_by_user(name_logado)
+        all_dodia = tasks_dodia_by_user(name_logado)
+        all_futuras=tasks_futuras_by_user(name_logado)
+
+    name_to_search = request.POST['input_search'].lower()
+
+    if name_to_search:
+        search_in_atrasadas=all_atrasadas.filter(titulo__icontains=name_to_search)|all_atrasadas.filter(descricao__icontains=name_to_search)|all_atrasadas.filter(titulo__icontains=name_to_search.capitalize())|all_atrasadas.filter(descricao__icontains=name_to_search.capitalize())|all_atrasadas.filter(titulo__icontains=name_to_search.upper())|all_atrasadas.filter(descricao__icontains=name_to_search.upper())
+
+        search_in_doDia=all_dodia.filter(titulo__icontains=name_to_search)|all_dodia.filter(descricao__icontains=name_to_search)|all_dodia.filter(titulo__icontains=name_to_search.capitalize())|all_dodia.filter(descricao__icontains=name_to_search.capitalize())|all_dodia.filter(titulo__icontains=name_to_search.upper())|all_dodia.filter(descricao__icontains=name_to_search.upper())
+
+        search_in_futuras=all_futuras.filter(titulo__icontains=name_to_search)|all_futuras.filter(descricao__icontains=name_to_search)|all_futuras.filter(titulo__icontains=name_to_search.capitalize())|all_futuras.filter(descricao__icontains=name_to_search.capitalize())|all_futuras.filter(titulo__icontains=name_to_search.upper())|all_futuras.filter(descricao__icontains=name_to_search.upper())
+
+        titulo="Busca de tarefas que contém "+name_to_search.upper()+":"
+
+        Tasks_atrasadas=search_in_atrasadas
+
+        TasksDoDia=search_in_doDia
+    
+        Tasks_futuras=search_in_futuras
+    else:
+        titulo="Sua busca por "+name_to_search+" não encontrou resultados."
+        Tasks_atrasadas=""
+        TasksDoDia=""
+        Tasks_futuras=""
+
+    return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'search': titulo} )
 
 def teste(request):
     return render(request, 'teste.html')

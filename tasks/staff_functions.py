@@ -1,5 +1,15 @@
 from .models import Task
 from datetime import date, datetime
+from django.contrib.auth import get_user_model
+
+def create_choices():
+    User = get_user_model()
+    users = User.objects.all()
+    choices=[]
+    for user in users:
+        list_element=(user.username)
+        choices.append(list_element)
+    return (choices)
 
 # Pesquisas
 def all_tasks():
@@ -14,15 +24,15 @@ def tasks_by_user(username):
     tasks_by_user=Task.objects.filter(nome_pessoa=username)
     return (tasks_by_user)
 
-def all_atrasadas():
+def func_all_atrasadas():
     all_atrasadas=Task.objects.filter(need_init_at__lt=date.today()).values().order_by('-created_at')
     return all_atrasadas
 
-def all_dodia():
+def func_all_dodia():
     all_dodia=Task.objects.filter(need_init_at__exact=date.today()).values().order_by('-created_at')
     return all_dodia
 
-def all_futuras():
+def func_all_futuras():
     all_futuras=Task.objects.filter(need_init_at__gt=date.today()).values().order_by('-created_at')
     return all_futuras
 

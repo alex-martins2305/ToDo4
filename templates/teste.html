@@ -1,30 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elemento select separado do formulário</title>
-</head>
-<body>
-    <form action="#" method="post" id="frmCores">
-        <label for="txtNome">Informe o seu nome</label>
-        <input type="text" id="txtNome" name="nome">
-        <input type="button" id="btnEnviar" value="Exibir as informações">
-    </form>
-    <br>
-    <label for="ddlCores">Escolha uma cor</label>
-    <select id="ddlCores" name="cores" form="frmCores">
-        <option value="verde">Verde</option>
-        <option value="amarelo">Amarelo</option>
-        <option value="roxo">Roxo</option>
-        <option value="lilas">Lilás</option>
-    </select>
-    <h2 id="resultado"></h2>  
-    <script>
-        document.getElementById("btnEnviar").onclick = function () {
-            let formCores = document.getElementById('frmCores').elements;
-            document.getElementById("resultado").innerHTML = "Seu nome é " + formCores["nome"].value + " e a cor selecionada é " + formCores["cores"].value;
-         };
-    </script>   
-</body>
-</html>   
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Preloader -->
+
+    <div class="container" >
+        <a class="links" id="paracadastro"></a>
+        <a class="links" id="paralogin"></a>
+         
+        <div class="content">      
+          <!--FORMULÁRIO DE LOGIN-->
+          <div id="login">
+            <form method="post" action=""> 
+              <h1>Login</h1> 
+              <p> 
+                <label for="nome_login">Usuário</label>
+                <input id="nome_login" name="nome_login" required="required" type="text" placeholder="nome ou email"/>
+              </p>
+               
+              <p> 
+                <label for="email_login">Senha</label>
+                <input id="email_login" name="email_login" required="required" type="password" placeholder="senha" /> 
+              </p>
+               
+              <p> 
+                <input type="submit" value="Logar" /> 
+              </p>
+               
+              <p class="link">
+                Ainda não tem conta?
+                <a href="#paracadastro">Cadastre-se</a>
+              </p>
+            </form>
+          </div>
+
+            </form>
+          </div>
+        </div>
+      </div>   
+{% endblock %}

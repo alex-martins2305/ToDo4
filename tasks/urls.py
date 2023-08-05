@@ -15,7 +15,7 @@ urlpatterns = [
     path('dashboard/task_finalizadas/', views.tasksFinalizadas, name='tasksFinalizadas'),
     path('dashboard/task_justificadas/', views.tasksJustificadas, name='tasksJustificadas'),
     path('dashboard/task_todas/', views.tasksTodas, name='tasksTodas'),
-    #path('dashboard/filterbyuser/', views.filterByUser, name='filterByUser'),
+    path('dashboard/search/', views.search, name='search'),
     path('teste/', views.teste, name='teste'),
 
 
