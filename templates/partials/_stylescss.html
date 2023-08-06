@@ -37,10 +37,20 @@
         opacity: .8;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
     }
+  
     .background {
         background-image: url('http://images.unsplash.com/photo-1520846692007-5da001f1b57c?auto=format&fit=crop&w=1000&q=80');
+        width: 100%;
     }
     
+    @media (max-width: 1080px) {
+    .container {
+        width: 100%;
+        max-width: 80rem;
+        z-index: 1;
+    }
+    }
+
     /* HEADER */
     .formulario .header {
         text-align: top;
