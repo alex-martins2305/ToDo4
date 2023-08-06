@@ -49,15 +49,15 @@ def tasks_futuras_by_user(username):
     return (tasks_futuras_by_user)
 
 def all_atrasadas_iniciada_naoIniciada():
-    all_atrasadas_iniciada_naoIniciada=all_atrasadas().filter(etapas='não iniciada')|all_atrasadas().filter(etapas='iniciada')
+    all_atrasadas_iniciada_naoIniciada=func_all_atrasadas().filter(etapas='não iniciada')|func_all_atrasadas().filter(etapas='iniciada')
     return all_atrasadas_iniciada_naoIniciada
 
 def all_dodia_iniciada_naoIniciada():
-    all_dodia_iniciada_naoIniciada=all_dodia().filter(etapas='não iniciada')|all_dodia().filter(etapas='iniciada')
+    all_dodia_iniciada_naoIniciada=func_all_dodia().filter(etapas='não iniciada')|func_all_dodia().filter(etapas='iniciada')
     return all_dodia_iniciada_naoIniciada
 
 def all_futuras_iniciada_naoIniciada():
-    all_futuras_iniciada_naoIniciada=all_futuras().filter(etapas='não iniciada')|all_futuras().filter(etapas='iniciada')
+    all_futuras_iniciada_naoIniciada=func_all_futuras().filter(etapas='não iniciada')|func_all_futuras  ().filter(etapas='iniciada')
     return all_futuras_iniciada_naoIniciada
 
 def all_finalizadas():

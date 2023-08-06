@@ -3,56 +3,35 @@
 {% block content %}
 <!-- Preloader -->
 
-        <div class="contem_login" >
-            <h2 class="col-12 text-center">
-                <div class="label_login">Login</div>
-                {% include 'partials/_alerts.html'%}
-            </h2> 
-            <tb>
-                <tr>
-                    <td>
-                        <div class="col-12 text-center">   
-                            <form action="{% url 'login' %}" method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-12 col-lg-12">
-                                        <label for="email"><b>Nome ou email</b></label>
-                                    </div>
-                                    <div class="col-12 col-lg-12">
-                                        <input style="text-align: center; width:200px" type="text" id="email" name="email_user" placeholder="Nome ou email">
-                                    </div>
-                                    <div class="col-12 col-lg-12">
-                                        <label for="senha"><b>Senha</b></label>
-                                    </div >
-                                    <div class="col-12 col-lg-12">
-                                        <input id="password" type="password" style="width: 200px; text-align: center;" name="password" placeholder="Digite aqui sua senha">
-                                    </div>
-                                    <div class="col-12 text-center" style="margin-top:1cm">
-                                        <button class="btn btn-success" type="submit">Acessar sua conta</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-12 text-center">             
-                                <form  action="{% url 'signup' %}">
-                                    <button class="btn btn-primary" type="submit" >Ainda não tem conta? Clique aqui</button>
-                                </form>
-                            </tr>
-                        </div>
-                    </td>
-                </tr>
-            </tb>
+<div class="background"></div>
+<div class="backdrop"></div>
+
+<div class="page">
+  <div class="container">
+    <div class="formulario">
+      <!-- HEADER -->
+      <div class="header">
+       
+        <h3>Login ToDo4</h3>
+      </div>
+      <!-- FORMULARIO -->
+      <form method="POST" action="{% url 'login' %}" class="form">
+        {% csrf_token %}
+        <div class="input">
+          <i class="fa fa-user icone"></i>
+          <input  name="email_user" placeholder="nome ou Email">
         </div>
-
-    
-
-<script>
-function exibirCriarConta()
-{
-     location.href = "";
-} 
-</script>
+        <div class="input">
+          <i class="fa fa-lock icone"></i>
+          <input type="password" id="login-password" name="password" placeholder="Password">
+        </div>
+       
+        <input type="submit" name="login" value="Login" class="btn btn-login">
+        <a href="{% url 'signup' %}" class="btn btn-registrar">Cadastro</a>
+      </form>
+      
+    </div>
+  </div>
+</div>
 
 {% endblock %}
