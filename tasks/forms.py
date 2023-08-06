@@ -1,6 +1,5 @@
 from django import forms
 from .models import Task
-from tempus_dominus.widgets import DatePicker
 from .validator import *
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
@@ -20,9 +19,7 @@ class newTaskForm(forms.Form):
     class Meta:
         model= Task
         fields={'titulo', 'descricao','need_init_at' }
-        widgets= {
-            'need_init_at': DatePicker(),
-        }
+        
 
     def clean(self):
         titulo=self.cleaned_data.get('titulo')
@@ -46,9 +43,6 @@ class newTaskForm2(forms.Form):
     class Meta:
         model= Task
         fields={'titulo', 'descricao','need_init_at' }
-        widgets= {
-            'need_init_at': DatePicker(),
-        }
 
     def clean(self):
         titulo=self.cleaned_data.get('titulo')
