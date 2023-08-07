@@ -1,45 +1,10 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<!-- Preloader -->
+<h1 id="resolucao">Resolução</h1>
 
-<div class="background"></div>
-<div class="backdrop"></div>
-
-<div class="page">
-  <div class="container">
-    <div class="formulario">
-      <!-- HEADER -->
-      <div class="header">
-       
-        <h3>Cadastro de Usuário</h3>
-      </div>
-      <!-- FORMULARIO -->
-      <form method="POST" action="{% url 'signup' %}" class="form">
-        {% csrf_token %}
-        <div class="input">
-          <i class="fa fa-user icone"></i>
-          <input  name="name" placeholder="nome">
-        </div>
-        <div class="input">
-          <i class="fa fa-envelope icone"></i>
-          <input  name="email" placeholder="email">
-        </div>
-        <div class="input">
-          <i class="fa fa-lock icone"></i>
-          <input type="password" id="login-password" name="password1" placeholder="Senha">
-        </div>
-        <div class="input">
-          <i class="fa fa-lock icone"></i>
-          <input type="password" id="login-password" name="password2" placeholder="Confirme sua senha">
-        </div>
-       
-        <input type="submit" name="cadastro" value="Cadastrar" class="btn btn-login">
-        <a href="{% url 'login' %}" class="btn btn-cancelar">Cancelar</a>
-      </form>
-      
-    </div>
-  </div>
-</div>
-
-{% endblock %}
+<script>
+  window.addEventListener("resize", () => {
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  console.log(`Resolução da janela de visualização: ${viewportWidth}x${viewportHeight}`);
+  document.getElementById("resolucao").innerHTML = viewportWidth +' x '+viewportHeight;
+});
+</script>
