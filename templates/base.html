@@ -13,28 +13,15 @@
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" >    
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'ccs/styles.css' %}"> -->
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> <!--need this to menu function, copied from site  https://getbootstrap.com/docs/5.1/getting-started/download/-->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> <!--this line allow to use bootstrap icons, copied from site https://icons.getbootstrap.com/#install-->
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    
         <body>  
-            {% if user.is_authenticated %}
-                <div>
-                    <a href="{% url 'dashboard' %}" type="button" class="btn btn-warning">ToDo</a>
-                    <a href="{% url 'tasksDoDia' %}" type="button" class="btn btn-success">TAREFAS DO DIA</a>
-                    <a href="{% url 'tasksFuturas' %}" type="button" class="btn btn-primary">TAREFAS FUTURAS</a>
-                    <a href="{% url 'tasksAtrasadas' %}" type="button" class="btn btn-danger">TAREFAS ATRASADAS</a>
-                    {% if user.is_superuser %}
-                    <a href="{% url 'admin:index' %}" type="button" class="btn btn-primary">Admin</a>
-                    {%else%}
-                    <a href="{% url 'tasksTodas' %}" type="button" class="btn btn-info">TODAS</a>
-                    {%endif%}
-                    <a href="{% url 'tasksFinalizadas' %}" type="button" class="btn btn-outline-danger">TAREFAS FINALIZADAS</a>
-                    <a href="{% url 'tasksJustificadas' %}" type="button" class="btn btn-outline-danger">TAREFAS JUSTIFICADAS</a>
-                    <a>{% include 'partials/_search.html' %}</a>
-                </div>
-            {% endif %}
-        {% block content %} {%endblock%}
+            {% include 'partials/_menu.html' %}
+            {% block content %} {%endblock%}
             <!-- jquery -->
             <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
             <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -43,6 +30,8 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             <!-- Font Awesome -->
             <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> <!--need this script to menu function, copied from  https://getbootstrap.com/docs/5.1/getting-started/download/-->
         </body>
 </html>
 

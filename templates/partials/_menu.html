@@ -1,0 +1,48 @@
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'dashboard' %}">Todo4</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'tasksDoDia' %}">Tarefas do Dia <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'tasksFuturas' %}">Tarefas Futuras <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'tasksAtrasadas' %}">Tarefas atrasadas<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'tasksFinalizadas' %}">Finalizadas <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'tasksJustificadas' %}">Justificadas <span class="sr-only"></span></a>
+            </li>
+            {% if user.is_superuser %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'admin:index' %}">Admin <span class="sr-only"></span></a>
+                </li>
+            {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'tasksTodas' %}">Todas <span class="sr-only"></span></a>
+                </li>
+            {% endif %}
+                <li>
+                    <form action="{% url 'search' %}" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <input name="input_search">
+                            <button type="submit" class="btn btn-light">
+                                <i class="bi bi-search"></i> <!--copied from https://icons.getbootstrap.com/icons/search/-->
+                            </button>
+                        </div>  
+                    </form>
+                </li>
+        </ul>
+    </div>
+  </nav>
+  {% endif %}
