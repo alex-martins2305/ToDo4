@@ -1,7 +1,7 @@
 <style>
     body {
         font-family: "open sans", "segoe ui", sans-serif;
-        font-size: 14px;
+        font-size: 20px;
         margin: 0;
         padding: 0;
         overflow: hidden; 
@@ -14,13 +14,13 @@
     }
     .containe {
         width: 100%;
-        max-width: 40rem;
+        max-width: 50rem;
         z-index: 1;
         justify-content: center ;     
     }
     .formulario, .formulario_register{
         background-color: #FFFFFF;
-        padding: 25px;        
+        padding: 40px;        
     }
     
     /* BACKGROUND */
@@ -51,8 +51,8 @@
     }
     .formulario .header h3, .formulario_register .header h3 {
         font-weight: lighter;
-        font-size: 25px;
-        margin: 10px 0;
+        font-size: 35px;
+        margin: 15px 0;
     }
     /* logo */
     .formulario .header .logo, .formulario_register .header .logo {
@@ -76,7 +76,7 @@
     .formulario .header .logo .logo-area, .formulario_register .header .logo .logo-area {
         background: #F2F2F2;
         color: #0D0D0D;
-        font-size: 14px;
+        font-size: 25px;
         font-weight: bold;
         }
         .formulario .header .logo .red, .formulario_register .header .logo .red{ 
@@ -85,22 +85,22 @@
     
     /* INPUT */
     .formulario .icone, .formulario_register .icone {
-        width: 30px;
+        width: 40px;
         vertical-align: top;
         border: 0;/**/
         padding: 0;/**/
     }
     .formulario .input, .formulario_register .input {
         border-bottom: 1px solid #CCCCCC;
-        margin-top: 15px;
-        font-size: 20px;
+        margin-top: 20px;
+        font-size: 25px;
         color: #9e9e9e;
-        padding-bottom: 5px;
-        margin-bottom: 30px;
+        padding-bottom: 10px;
+        margin-bottom: 45px;
     }
     .formulario .input input, .formulario_register .input input {
         border: 0;
-        width: calc(100% - 71px);
+        width: calc(100% - 70px);
         padding: 0;/**/
     }
     .formulario .input input:focus, .formulario_register .input input:focus {
@@ -115,9 +115,9 @@
         cursor: pointer;
         display: block;
         border: 0;
-        height: 20px;
-        padding: 10px;
-        font-size: 15px;
+        height: 35px;
+        padding: 15px;
+        font-size: 22px;
         text-align: center;
         transition: background .3s;
     }
@@ -129,7 +129,7 @@
         color: #FFFFFF;
         margin-top: 30px;
         width: 100%;
-        height: 40px;
+        height: 60px;
     }
 
     .formulario .btn-login:hover, .formulario_register .btn-login:hover {
@@ -140,14 +140,14 @@
         color: #676464;
         text-decoration: none;
         margin-top: 15px;
-        height: 40px;
+        height: 60px;
     }
     .formulario .btn-cancelar, .formulario_register .btn-cancelar{
         background: #dbdbdb;
         color: #676464;
         text-decoration: none;
         margin-top: 15px;
-        height: 40px;
+        height: 60px;
     }
     .formulario .btn-registrar:hover, .formulario_register .btn-registrar:hover{
         background: #cdcdcd;
@@ -156,7 +156,7 @@
     /* SEPARADOR */
     .formulario .separator, .formulario_register .separator{
         margin: 20px 0;
-        border-top: 1px solid #CCCCCC;
+        border-top: 2px solid #CCCCCC;
         position: relative;
     }
     .formulario .separator-text, .formulario_register .separator-text{
@@ -189,119 +189,5 @@
     color: #aaa;
     line-height: 25px;
     }
-
-    /* DESTE PONTO EM DIANTE ESTA O CSS PARA DISPOSITIVO MENORES */
-    @media (max-width: 1000px) {
-    
-    /* INPUT EM DISPOSITIVOS PEQUENOS */
-    .formulario .icone, .formulario_register .icone {
-        width: 50px;
-        vertical-align: top;
-        border: 0;/**/
-        padding: 0;/**/
-        }
-    .formulario .input, .formulario_register .input{
-        border-bottom: 1px solid #CCCCCC;
-        margin-top: 15px;
-        font-size: 30px;
-        color: #9e9e9e;
-        padding-bottom: 5px;
-    }
-    .formulario .input input, .formulario_register .input input {
-        border: 0;
-        width: calc(100% - 60px);
-        padding: 0;/**/
-    }
-    .formulario .input input:focus, .formulario_register .input input:focus {
-        outline: none;
-    }
-    .formulario #show-password, .formulario_register #show-password{
-        cursor: pointer;
-    }
-    
-    .containe {
-        width: 100%;
-        max-width: 80rem;        
-        z-index: 1;
-    }
-    .formulario, .formulario_register{
-        height: 100%;
-        max-height: 40rem;
-    }
- /* fonte DISPOSITIVO PEQUENOS */
-    .formulario .header .logo .logo-area, .formulario_register .header .logo .logo-area{
-    background: #F2F2F2;
-    color: #0D0D0D;
-    font-size: 20px;
-    font-weight: bold;
-    }
-    .formulario .separator, .formulario_register .separator {
-        margin: 20px 0;
-        border-top: 1px solid #CCCCCC;
-        position: relative;
-    }
-    .formulario .separator-text, .formulario_register .separator-text {
-        display: block;
-        position: absolute;
-        top: 0px;
-        left: 50%;
-        margin-left: -22px;
-        padding: 0px 10px;
-        background: #FFFFFF;
-        color: #8a8a8a;
-    }
-    .formulario .btn-login , .formulario_register .btn-login{
-        background: #2f7fd6;
-        color: #FFFFFF;
-        margin-top: 15px;
-        width: 100%;
-        height: 40px;
-    }
-/* BOTÕES EM DISPOSITIVOS PEQUENOS */
-    .formulario .btn-login, .formulario_register .btn-login {
-        background: #2f7fd6;
-        color: #FFFFFF;
-        margin-top: 15px;
-        width: 100%;
-        height: 40px;
-    }
-    .formulario .btn-registrar , .formulario_register .btn-registrar{
-        background: #dbdbdb;
-        color: #676464;
-        text-decoration: none;
-        margin-top: 10px;
-        height: 60px;
-    }
-    .formulario .btn-cancelar , .formulario_register .btn-cancelar{
-        background: #dbdbdb;
-        color: #676464;
-        text-decoration: none;
-        margin-top: 10px;
-        height: 60px;
-    }
-    .formulario .btn, .formulario_register .btn {
-        cursor: pointer;
-        display: block;
-        border: 0;
-        height: 50px;
-        padding: 10px;
-        font-size: 25px;
-        text-align: center;
-        transition: background .3s;
-    }
-
-    .formulario .header h3, .formulario_register .header h3{
-        font-weight: lighter;
-        font-size: 40px;
-        margin: 10px 0;
-        text-align: center;
-    }
-  
-    .formulario_register {
-        height: 100%;
-        max-height: 55rem;
-    }
-    }
-
    
 </style>
