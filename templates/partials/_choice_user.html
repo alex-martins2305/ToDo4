@@ -1,0 +1,36 @@
+<div class="choice">
+    <div>
+        {% if dashboards %}
+            <form  action="{% url 'dashboard' %}" method="POST">
+        {% elif atrasadas %}
+            <form  action="{% url 'tasksAtrasadas' %}" method="POST"> 
+        {% elif dodia %}
+            <form  action="{% url 'tasksDoDia' %}" method="POST"> 
+        {% elif futuras %}
+            <form  action="{% url 'tasksFuturas' %}" method="POST"> 
+        {% elif finalizadas %}
+            <form  action="{% url 'tasksFinalizadas' %}" method="POST"> 
+        {% elif justificadas %}
+            <form  action="{% url 'tasksJustificadas' %}" method="POST"> 
+        {%endif%}
+   
+        {% if search %}
+            <div>{{search}}</div>
+        {% else %}
+            {% csrf_token %}
+            {% if user.is_superuser %}
+                <div >
+                    <select name="user" >
+                            <option>Filtrar por usuário</option> 
+                        {% for pessoa in usuarios %}
+                            <option>{{pessoa}}</option> 
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                        <i class="bi bi-chevron-double-right"></i>
+                </div>    
+            {% endif %} 
+        {% endif %}          
+        </form>
+    </div>
+</div>

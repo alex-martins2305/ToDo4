@@ -1,4 +1,11 @@
 <style>
+    /* VARIAVEIS */
+    :root{
+    --bs-bg-opacity: 1;
+    --bs-light: #f8f9fa;
+    --bs-dark-rgb: 33,37,41;
+    }
+
     body {
         font-family: "open sans", "segoe ui", sans-serif;
         font-size: 20px;
@@ -54,6 +61,49 @@
         font-size: 35px;
         margin: 15px 0;
     }
+
+    /* MENU */
+
+    .segundo_menu {
+        width: 100%;
+        text-align: center; 
+        background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity)) !important;
+        height: auto;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .choice {
+        align-self: center;
+    }
+
+    .btn_filtrar {
+        max-height: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .menu_lupa{
+        margin-bottom: 0.4rem;
+        max-height: 1.7rem;
+    }
+
+    .form_search {
+        margin-top: 1rem;
+    }
+
+    .dropdown-menu{
+        background-color: transparent !important;
+        max-width: 10px;
+    }
+
+    /* .username {
+        margin-right: 10%;
+    }
+
+    .link_sair {
+        padding-right: 20px;
+    } */ 
+ 
     /* logo */
     .formulario .header .logo, .formulario_register .header .logo {
         border: 1px solid #CCC;

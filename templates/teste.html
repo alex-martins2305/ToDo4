@@ -1,295 +1,42 @@
-<div class="background"></div>
-<div class="backdrop"></div>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-  <div class="container">
-    <div class="containe"> <!--erase the 'r'of container to not get automatic grid of container -->
-      <div class="formulario_register">
-        <!-- HEADER -->
-        <div class="header">
-          <h3>Cadastro de Usuário</h3>
-        </div>
-        <!-- FORMULARIO -->
-        <form method="POST" action="{% url 'signup' %}" class="form">
-          {% csrf_token %}
-          <div class="input">
-            <i class="fa fa-user icone"></i>
-            <input  name="name" placeholder="nome">
-          </div>
-          <div class="input">
-            <i class="fa fa-envelope icone"></i>
-            <input  name="email" placeholder="email">
-          </div>
-          <div class="input">
-            <i class="fa fa-lock icone"></i>
-            <input type="password" id="login-password" name="password1" placeholder="Senha">
-          </div>
-          <div class="input">
-            <i class="fa fa-lock icone"></i>
-            <input type="password" id="login-password" name="password2" placeholder="Confirme sua senha">
-          </div>
-         
-          <input type="submit" name="cadastro" value="Cadastrar" class="btn btn-login">
-          <a href="{% url 'login' %}" class="btn btn-cancelar">Cancelar</a>
-        </form>
-        
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
+</nav>
 
-<style>
-  /* reset */
-  * {
-padding:0;
-margin:0;
-vertical-align:baseline;
-list-style:none;
-border:0
-}
-
-.container {
-  display: flex;
-  justify-content:center ;
-  background-color: red;
-  height: 100%;
-  width: 100%;
-  font-size: 35pt;
-  font-weight: bolder;
-}
-
-.containe {
-  margin-top: 20rem;
-  padding: 10px;
-  height: 100px;
-  z-index: 1;
-}
-
-.resolucao {
-  background-color: blue;
-  height: 100px;
-}
-
-/* BACKGROUND */
-.background, .backdrop {
-        background-color: #3f689c;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-    }
-    .backdrop {
-        background: #333333;
-        filter: alpha(opacity=90);
-        opacity: .8;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    }
-    .background {
-        background-image: url('http://images.unsplash.com/photo-1520846692007-5da001f1b57c?auto=format&fit=crop&w=1000&q=80');
-        width: 100%;
-    }
-    <style>
-    body {
-        font-family: "open sans", "segoe ui", sans-serif;
-        font-size: 14px;
-        margin: 0;
-        padding: 0;
-        overflow: hidden; 
-    }
-    .page {
-        display: flex;
-        margin-top: 10rem;
-        justify-content: center;
-        min-height: 100vh;
-    }
-    .containe {
-        width: 100%;
-        max-width: 40rem;
-        z-index: 1;
-        justify-content: center ;     
-    }
-    .formulario, .formulario_register{
-        background-color: #FFFFFF;
-        padding: 25px;        
-    }
-    
-    /* BACKGROUND */
-    .background, .backdrop {
-        background-color: #3f689c;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-    }
-    .backdrop {
-        background: #333333;
-        filter: alpha(opacity=90);
-        opacity: .8;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-    }
-  
-    .background {
-        background-image: url('http://images.unsplash.com/photo-1520846692007-5da001f1b57c?auto=format&fit=crop&w=1000&q=80');
-        width: 100%;
-    }
-    
-    /* HEADER */
-    .formulario .header, .formulario_register .header {
-        text-align: top;
-    }
-    .formulario .header h3, .formulario_register .header h3 {
-        font-weight: lighter;
-        font-size: 25px;
-        margin: 10px 0;
-    }
-    /* logo */
-    .formulario .header .logo, .formulario_register .header .logo {
-        border: 1px solid #CCC;
-        border-radius: 50%;
-        margin: 0 auto;
-        width: 87px;
-        height: 87px;
-    }
-    .formulario .header .logo .logo-area, .formulario_register .header .logo .logo-area {
-        border: 1px solid #CCC;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 75px;
-        height: 75px;
-        margin: 5px;
-    }
-    /* fonte */
-    .formulario .header .logo .logo-area, .formulario_register .header .logo .logo-area {
-        background: #F2F2F2;
-        color: #0D0D0D;
-        font-size: 14px;
-        font-weight: bold;
-        }
-        .formulario .header .logo .red, .formulario_register .header .logo .red{ 
-        color: #DC143C; 
-        }
-    
-    /* INPUT */
-    .formulario .icone, .formulario_register .icone {
-        width: 30px;
-        vertical-align: top;
-        border: 0;/**/
-        padding: 0;/**/
-    }
-    .formulario .input, .formulario_register .input {
-        border-bottom: 1px solid #CCCCCC;
-        margin-top: 15px;
-        font-size: 20px;
-        color: #9e9e9e;
-        padding-bottom: 5px;
-        margin-bottom: 30px;
-    }
-    .formulario .input input, .formulario_register .input input {
-        border: 0;
-        width: calc(100% - 71px);
-        padding: 0;/**/
-    }
-    .formulario .input input:focus, .formulario_register .input input:focus {
-        outline: none;
-    }
-    .formulario #show-password, .formulario_register #show-password {
-        cursor: pointer;
-    }
-    
-    /* BOTOES */
-    .formulario .btn, .formulario_register .btn{
-        cursor: pointer;
-        display: block;
-        border: 0;
-        height: 20px;
-        padding: 10px;
-        font-size: 15px;
-        text-align: center;
-        transition: background .3s;
-    }
-    .formulario .btn:focus, .formulario_register .btn:focus {
-        outline: none;
-    }
-    .formulario .btn-login, .formulario_register .btn-login {
-        background: #2f7fd6;
-        color: #FFFFFF;
-        margin-top: 30px;
-        width: 100%;
-        height: 40px;
-    }
-
-    .formulario .btn-login:hover, .formulario_register .btn-login:hover {
-        background: #1e6fb8;
-    }
-    .formulario .btn-registrar, .formulario_register .btn-registrar {
-        background: #dbdbdb;
-        color: #676464;
-        text-decoration: none;
-        margin-top: 15px;
-        height: 40px;
-    }
-    .formulario .btn-cancelar, .formulario_register .btn-cancelar{
-        background: #dbdbdb;
-        color: #676464;
-        text-decoration: none;
-        margin-top: 15px;
-        height: 40px;
-    }
-    .formulario .btn-registrar:hover, .formulario_register .btn-registrar:hover{
-        background: #cdcdcd;
-    }
-    
-    /* SEPARADOR */
-    .formulario .separator, .formulario_register .separator{
-        margin: 20px 0;
-        border-top: 1px solid #CCCCCC;
-        position: relative;
-    }
-    .formulario .separator-text, .formulario_register .separator-text{
-        display: block;
-        position: absolute;
-        top: -11px;
-        left: 50%;
-        margin-left: -22px;
-        padding: 0px 10px;
-        background: #FFFFFF;
-        color: #8a8a8a;
-    }
-    
-    
-    @media (max-width: 261px) {
-    .xs-hidden {
-        display: none !important;
-    }
-    }
-    @media (min-width: 262px) {
-    .xs-show {
-        display: none !important;
-    }
-    }
-    
-    /* ATRIBUIÇÃO */
-    .attrib {
-    text-align: center;
-    margin-top: 7px;
-    color: #aaa;
-    line-height: 25px;
-    }
-</style>
-
-
-
-
-
-<script>
-  window.addEventListener("resize", () => {
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  console.log(`Resolução da janela de visualização: ${viewportWidth}x${viewportHeight}`);
-  document.getElementById("resolucao").innerHTML = viewportWidth +' x '+viewportHeight;
-});
-</script>
+{% endblock %}

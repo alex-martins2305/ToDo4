@@ -1,48 +1,45 @@
 {% if user.is_authenticated %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'dashboard' %}">Todo4</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-  
-    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'tasksDoDia' %}">Tarefas do Dia <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'tasksFuturas' %}">Tarefas Futuras <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'tasksAtrasadas' %}">Tarefas atrasadas<span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'tasksFinalizadas' %}">Finalizadas <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'tasksJustificadas' %}">Justificadas <span class="sr-only"></span></a>
-            </li>
-            {% if user.is_superuser %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'admin:index' %}">Admin <span class="sr-only"></span></a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dashboard'%}">Todo4</a>  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'tasksDoDia' %}">Do dia</a>
                 </li>
-            {% else %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'tasksTodas' %}">Todas <span class="sr-only"></span></a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'tasksFuturas' %}">Futuras</a>
                 </li>
-            {% endif %}
-                <li>
-                    <form action="{% url 'search' %}" method="POST">
-                        {% csrf_token %}
-                        <div>
-                            <input name="input_search">
-                            <button type="submit" class="btn btn-light">
-                                <i class="bi bi-search"></i> <!--copied from https://icons.getbootstrap.com/icons/search/-->
-                            </button>
-                        </div>  
-                    </form>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'tasksAtrasadas' %}">Atrasadas</a>
                 </li>
-        </ul>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'tasksJustificadas' %}">Justificadas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'tasksJustificadas' %}">Finalizadas</a>
+                </li>
+                
+                <li class="nav-item dropdown link_sair">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{user.username}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="{% url 'logout' %}">Sair</a>
+                    </div>
+                </li>
+            </ul>
+            <form  class="d-flex" >
+                {% include 'partials/_search.html' %}
+            </form>
+        </div>
     </div>
-  </nav>
-  {% endif %}
+</nav>
+
+<div class="segundo_menu">
+    {% include 'partials/_choice_user.html' %}
+</div>
+{% endif %}

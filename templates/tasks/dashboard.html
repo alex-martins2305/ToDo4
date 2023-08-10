@@ -4,55 +4,6 @@
 {% block content%}
 
 <center>
-
-<a  href="{% url 'logout' %}" >Logout</a>
-<h5>{{user.username}}</h5>
-
-<div style="max-width: 180px;">
-    <div>
-        {% if dashboards %}
-            <form  action="{% url 'dashboard' %}" method="POST">
-                dashboard 
-        {% elif atrasadas %}
-            <form  action="{% url 'tasksAtrasadas' %}" method="POST"> 
-                atrasadas
-        {% elif dodia %}
-            <form  action="{% url 'tasksDoDia' %}" method="POST"> 
-                dodia   
-        {% elif futuras %}
-            <form  action="{% url 'tasksFuturas' %}" method="POST"> 
-                futuras    
-        {% elif finalizadas %}
-            <form  action="{% url 'tasksFinalizadas' %}" method="POST"> 
-                finalizadas   
-        {% elif justificadas %}
-            <form  action="{% url 'tasksJustificadas' %}" method="POST"> 
-                justificadas       
-        {%endif%}
-    </div>
-        {% if search %}
-            <div>{{search}}</div>
-        {% else %}
-            {% csrf_token %}
-            {% if user.is_superuser %}
-                <div style="display: inline-block;"></div>
-                    <b>Filtre por usuário:</b>
-                    <select name="user" class="form-control">
-                            <option></option> 
-                        {% for pessoa in usuarios %}
-                            <option>{{pessoa}}</option> 
-                        {% endfor %}
-                    </select>
-                </div>
-                <div style="display: inline-block;">
-                    <button type="submit" class="btn btn-primary">Filtrar</a>
-                </div>
-            {% endif %} 
-            <h3><a href="{% url 'newtask' %}" type="button" class="btn btn-success">Nova tarefa</a></h3>
-        {% endif %}          
-    </form>
-</div>
-
         <ul class="task-list">
             <table>
                 {% for tasks in Tasks_atrasadas %}

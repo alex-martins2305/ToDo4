@@ -21,12 +21,11 @@ def dashboard(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!="" and name!="Filtrar por usuário":
                 Tasks_atrasadasTodas=tasks_atrasadas_by_user(name)
                 TasksDoDiaTodas=tasks_dodia_by_user(name)
                 Tasks_futurasTodas=tasks_futuras_by_user(name)           
             else:
-                print('bosta')
                 Tasks_atrasadasTodas=func_all_atrasadas()
                 TasksDoDiaTodas=func_all_dodia()
                 Tasks_futurasTodas=func_all_futuras()
@@ -55,7 +54,7 @@ def tasksAtrasadas(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!=""and name!="Filtrar por usuário":
                 tasks_atrasadas_by_user(name)
             else:
                 Tasks_atrasadasTodas=all_atrasadas_iniciada_naoIniciada()
@@ -81,7 +80,7 @@ def tasksDoDia(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!=""and name!="Filtrar por usuário":
                 TasksDoDiaTodas=tasks_dodia_by_user(name)
             else: 
                 TasksDoDiaTodas=all_dodia_iniciada_naoIniciada()
@@ -107,7 +106,7 @@ def tasksFuturas(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!=""and name!="Filtrar por usuário":
                 Tasks_futurasTodas=tasks_futuras_by_user(name)
             else:
                 Tasks_futurasTodas=all_futuras_iniciada_naoIniciada()
@@ -135,7 +134,7 @@ def tasksFinalizadas(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!=""and name!="Filtrar por usuário":
                 Tasks_finalizadasTodas=finalizadas_by_user(name)
             else:
                 Tasks_finalizadasTodas=all_finalizadas()
@@ -161,7 +160,7 @@ def tasksJustificadas(request):
                 name = request.POST['user']
             except:
                 name=""
-            if name!="":
+            if name!="" and name!="Filtrar por usuário":
                 Tasks_justificadasTodas=justificadas_by_user(name)
             else:
                 Tasks_justificadasTodas=all_justificadas()
