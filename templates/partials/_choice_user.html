@@ -2,35 +2,134 @@
     <div>
         {% if dashboards %}
             <form  action="{% url 'dashboard' %}" method="POST">
-        {% elif atrasadas %}
+                {% if search %}
+                    <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
+
+        {% if atrasadas %}
             <form  action="{% url 'tasksAtrasadas' %}" method="POST"> 
-        {% elif dodia %}
+                {% if search %}
+                <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
+          
+        {% if dodia %}
             <form  action="{% url 'tasksDoDia' %}" method="POST"> 
-        {% elif futuras %}
+                {% if search %}
+                <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
+          
+        {% if futuras %}
             <form  action="{% url 'tasksFuturas' %}" method="POST"> 
-        {% elif finalizadas %}
+                {% if search %}
+                <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
+          
+        {% if finalizadas %}
             <form  action="{% url 'tasksFinalizadas' %}" method="POST"> 
-        {% elif justificadas %}
+                {% if search %}
+                <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
+          
+        {% if justificadas %}
             <form  action="{% url 'tasksJustificadas' %}" method="POST"> 
-        {%endif%}
-   
-        {% if search %}
-            <div>{{search}}</div>
-        {% else %}
-            {% csrf_token %}
-            {% if user.is_superuser %}
-                <div >
-                    <select name="user" >
-                            <option>Filtrar por usuário</option> 
-                        {% for pessoa in usuarios %}
-                            <option>{{pessoa}}</option> 
-                        {% endfor %}
-                    </select>
-                    <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
-                        <i class="bi bi-chevron-double-right"></i>
-                </div>    
-            {% endif %} 
-        {% endif %}          
-        </form>
+                {% if search %}
+                <div>{{search}}</div>
+                {% else %}
+                    {% csrf_token %}
+                    {% if user.is_superuser %}
+                        <div >
+                            <select name="user" >
+                                    <option>Filtrar por usuário</option> 
+                                {% for pessoa in usuarios %}
+                                    <option>{{pessoa}}</option> 
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm btn_filtrar">
+                                <i class="bi bi-chevron-double-right"></i>
+                        </div>    
+                    {% endif %} 
+                {% endif %}  
+            </form>   
+        {%endif%}   
     </div>
 </div>

@@ -11,8 +11,8 @@
         font-size: 20px;
         margin: 0;
         padding: 0;
-        overflow: hidden; 
     }
+
     .page {
         display: flex;
         margin-top: 10rem;
@@ -39,6 +39,7 @@
         right: 0;
         bottom: 0;
         background-size: cover;
+        z-index: -1;
     }
     .backdrop {
         background: #333333;
@@ -123,16 +124,22 @@
         margin: 5px;
     }
     /* fonte */
-    .formulario .header .logo .logo-area, .formulario_register .header .logo .logo-area {
+    .formulario .header .logo .logo-area {
         background: #F2F2F2;
         color: #0D0D0D;
         font-size: 25px;
         font-weight: bold;
         }
-        .formulario .header .logo .red, .formulario_register .header .logo .red{ 
+    .formulario .header .logo .red, .formulario_register .header .logo .red{ 
         color: #DC143C; 
         }
-    
+     .formulario_register .header .logo .logo-area {
+        background: #F2F2F2;
+        color: #F2F2F2;
+        font-size: 25px;
+        font-weight: bold;
+        }
+     
     /* INPUT */
     .formulario .icone, .formulario_register .icone {
         width: 40px;
@@ -232,6 +239,30 @@
     }
     }
     
+    /* FORMULÁRIO PADRÃO DASHBOARD */
+    .task-list {
+        z-index: 1;
+        background-color:#333333;
+        margin-left: 5%;
+        margin-right: 5%;
+        /* display: flex; */
+        align-items: center;
+    }
+
+    .main-table {
+        width: 100%;
+        z-index: 1;
+    }
+     .semtarefas {
+        width: 100%;
+        color:#CCCCCC;
+        font-size: 1.8rem;
+        text-align: center;
+        align-items: center;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+
+     }
     /* ATRIBUIÇÃO */
     .attrib {
     text-align: center;
@@ -240,4 +271,61 @@
     line-height: 25px;
     }
    
+   /* BOTÃO FLUTUANTE */
+   .botao {  
+
+display: inline-block;  
+padding: 0.8em 1.2em;   
+margin-left: 5%; 
+background-color:#0987D2;  
+text-decoration: none;  
+color: #ffffff;
+border-radius:50px;
+font-family:'open_sansregular';  
+} 
+ 
+.flutuante {  
+display: inline-block;  
+-webkit-transition-duration: 0.4s;  
+transition-duration: 0.4s;  
+-webkit-transition-property: -webkit-transform;  
+transition-property: transform;  
+-webkit-transform: translateZ(0);  
+-ms-transform: translateZ(0);  
+transform: translateZ(0);  
+box-shadow: 0px 4px 2px 0px rgba(98, 98, 98, 0.69);
+}  
+  
+.flutuante:hover {  
+-webkit-transform: translateY(-5px);  
+-ms-transform: translateY(-5px);  
+transform: translateY(-5px);
+box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.69);  
+} 
+
+/* FORMULÁRIO NOVA TAREFA */
+.label_nova_tarefa {
+    text-align: center;
+    color:#aaa;
+    margin-top: 1rem;
+}
+
+#id_titulo_label, #id_descricao_label, #id_need_init_at_label, #id_pessoa_label {
+    font-size: 2rem;
+    color: #aaa;
+}
+
+.container_controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.8rem;
+}
+.control_btns {
+    width: auto;
+}
+
+#id_pessoa {
+    font-size: 1.5rem;
+    margin-top:1rem ;
+}
 </style>

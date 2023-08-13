@@ -39,7 +39,7 @@ def logout(request):
 
 def signup (request):
     if request.method == 'POST':
-        nome = request.POST['name']
+        nome = request.POST['name'].capitalize()
         email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']

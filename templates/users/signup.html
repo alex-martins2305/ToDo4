@@ -3,43 +3,42 @@
 {% block title%} Cadastro Usuário {% endblock%}
 {% block content %}
 <!-- Preloader -->
-
-<div class="background"></div>
-<div class="backdrop"></div>
-
-<div class="page">
-  <div class="containe"> <!--erase the 'r'of container to not get automatic grid of container -->
-    <div class="formulario_register">
-      <!-- HEADER -->
-      <div class="header">
-        <h3>Cadastro de Usuário</h3>
+<body style="overflow: hidden;">
+  <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
+  
+  <div class="page">
+    <div class="containe"> <!--erase the 'r'of container to not get automatic grid of container -->
+      <div class="formulario_register">
+        <!-- HEADER -->
+        <div class="header">
+          <h3>Cadastro de Usuário</h3>
+        </div>
+        <!-- FORMULARIO -->
+        <form method="POST" action="{% url 'signup' %}" class="form">
+          {% csrf_token %}
+          <div class="input">
+            <i class="fa fa-user icone"></i>
+            <input  name="name" placeholder="nome">
+          </div>
+          <div class="input">
+            <i class="fa fa-envelope icone"></i>
+            <input  name="email" placeholder="email">
+          </div>
+          <div class="input">
+            <i class="fa fa-lock icone"></i>
+            <input type="password" id="login-password" name="password1" placeholder="Senha">
+          </div>
+          <div class="input">
+            <i class="fa fa-lock icone"></i>
+            <input type="password" id="login-password" name="password2" placeholder="Confirme sua senha">
+          </div>
+        
+          <input type="submit" name="cadastro" value="Cadastrar" class="btn btn-login">
+          <a href="{% url 'login' %}" class="btn btn-cancelar">Cancelar</a>
+        </form>
+        
       </div>
-      <!-- FORMULARIO -->
-      <form method="POST" action="{% url 'signup' %}" class="form">
-        {% csrf_token %}
-        <div class="input">
-          <i class="fa fa-user icone"></i>
-          <input  name="name" placeholder="nome">
-        </div>
-        <div class="input">
-          <i class="fa fa-envelope icone"></i>
-          <input  name="email" placeholder="email">
-        </div>
-        <div class="input">
-          <i class="fa fa-lock icone"></i>
-          <input type="password" id="login-password" name="password1" placeholder="Senha">
-        </div>
-        <div class="input">
-          <i class="fa fa-lock icone"></i>
-          <input type="password" id="login-password" name="password2" placeholder="Confirme sua senha">
-        </div>
-       
-        <input type="submit" name="cadastro" value="Cadastrar" class="btn btn-login">
-        <a href="{% url 'login' %}" class="btn btn-cancelar">Cancelar</a>
-      </form>
-      
     </div>
   </div>
-</div>
-
+</body>
 {% endblock %}

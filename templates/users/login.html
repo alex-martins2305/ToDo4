@@ -2,36 +2,35 @@
 {% load static %}
 {% block content %}
 <!-- Preloader -->
+<body style="overflow: hidden;"> 
+  <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
 
-<div class="background"></div>
-<div class="backdrop"></div>
-
-<div class="page">
-  <div class="containe">
-    <div class="formulario">
-      <!-- HEADER -->
-      <div class="header">
-       
-        <h3>Login ToDo4</h3>
+  <div class="page">
+    <div class="containe">
+      <div class="formulario">
+        <!-- HEADER -->
+        <div class="header">
+        
+          <h3>Login ToDo4</h3>
+        </div>
+        <!-- FORMULARIO -->
+        <form method="POST" action="{% url 'login' %}" class="form">
+          {% csrf_token %}
+          <div class="input">
+            <i class="fa fa-user icone"></i>
+            <input  name="email_user" placeholder="nome ou Email">
+          </div>
+          <div class="input">
+            <i class="fa fa-lock icone"></i>
+            <input type="password" id="login-password" name="password" placeholder="Senha">
+          </div>
+        
+          <input type="submit" name="login" value="Login" class="btn btn-login">
+          <a href="{% url 'signup' %}" class="btn btn-registrar">Cadastro</a>
+        </form>
+        
       </div>
-      <!-- FORMULARIO -->
-      <form method="POST" action="{% url 'login' %}" class="form">
-        {% csrf_token %}
-        <div class="input">
-          <i class="fa fa-user icone"></i>
-          <input  name="email_user" placeholder="nome ou Email">
-        </div>
-        <div class="input">
-          <i class="fa fa-lock icone"></i>
-          <input type="password" id="login-password" name="password" placeholder="Password">
-        </div>
-       
-        <input type="submit" name="login" value="Login" class="btn btn-login">
-        <a href="{% url 'signup' %}" class="btn btn-registrar">Cadastro</a>
-      </form>
-      
     </div>
   </div>
-</div>
-
+</body>
 {% endblock %}

@@ -29,14 +29,24 @@ def dashboard(request):
                 Tasks_atrasadasTodas=func_all_atrasadas()
                 TasksDoDiaTodas=func_all_dodia()
                 Tasks_futurasTodas=func_all_futuras()
+                
+            if int(Tasks_atrasadasTodas.count())+int(TasksDoDiaTodas.count())+int(Tasks_futurasTodas.count()) ==0:
+                tarefas="Você ainda não cadastrou suas tarefas. Para começar clique no botão Nova Tarefa."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
 
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'TasksDoDia':TasksDoDiaTodas, 'Tasks_futuras':Tasks_futurasTodas, 'dashboards': titulo, 'usuarios':choices} )
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'TasksDoDia':TasksDoDiaTodas, 'Tasks_futuras':Tasks_futurasTodas, 'dashboards': titulo, 'usuarios':choices, 'semtarefas':tarefas} )
         else:
             Tasks_atrasadas=atrasadas_by_user_notInit_Init(name_logado)
             TasksDoDia=dodia_by_user_notInit_Init(name_logado) 
             Tasks_futuras=futuras_by_user_notInit_Init(name_logado)
+            if int(Tasks_atrasadas.count())+int(TasksDoDia.count())+int(Tasks_futuras.count()) ==0:
+                tarefas="Você ainda não cadastrou suas tarefas. Para começar clique no botão Nova Tarefa."
+            else:
+                tarefas=""
 
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'dashboards': titulo} )
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'dashboards': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
 
@@ -268,7 +278,9 @@ def newTask(request):
         pessoa = request.POST.get('pessoa')
 
         # Caso a sua data não esteja em formato Date, será necessário fazer a conversão
-        datetime_obj = datetime.strptime(need_init_at, '%d/%m/%Y')
+        # datetime_obj = datetime.strptime(need_init_at, '%d/%m/%Y')
+        # a conversão acima não será mais necessária desde que a data é escolhida no datapicker, pois ja vem no formato datetime
+        datetime_obj=need_init_at
         # Uma vez convertida a data ficará no formato padrão 2017-12-29 00:00:00
 
         if request.user.is_superuser:
@@ -291,6 +303,7 @@ def newTask(request):
         return render(request, "tasks/newtask.html", {'form':form})
 
 def search (request):
+    print("Função search sendo executada.")
     if request.user.is_authenticated:
         id = request.user.id
         name_logado=request.user.username
@@ -299,13 +312,14 @@ def search (request):
         all_atrasadas=func_all_atrasadas()
         all_dodia=func_all_dodia()
         all_futuras=func_all_futuras()
-        print('SuperUser selecionada todoas tarefas')
+        print('SuperUser selecionada todas tarefas')
     else:
         all_atrasadas=tasks_atrasadas_by_user(name_logado)
         all_dodia = tasks_dodia_by_user(name_logado)
         all_futuras=tasks_futuras_by_user(name_logado)
 
-    name_to_search = request.POST['input_search'].lower()
+    if request.method=='POST':
+        name_to_search = request.POST['input_search'].lower()
 
     if name_to_search:
         search_in_atrasadas=all_atrasadas.filter(titulo__icontains=name_to_search)|all_atrasadas.filter(descricao__icontains=name_to_search)|all_atrasadas.filter(titulo__icontains=name_to_search.capitalize())|all_atrasadas.filter(descricao__icontains=name_to_search.capitalize())|all_atrasadas.filter(titulo__icontains=name_to_search.upper())|all_atrasadas.filter(descricao__icontains=name_to_search.upper())

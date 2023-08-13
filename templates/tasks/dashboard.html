@@ -2,108 +2,117 @@
 {% load static %}
 {% block title %} Lista de Tarefas {% endblock%}    
 {% block content%}
+<body>
+    <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
 
-<center>
-        <ul class="task-list">
-            <table>
-                {% for tasks in Tasks_atrasadas %}
-                        <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
-                            <td style="width: 360px">
-                                <a style="padding-right: 30%; color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
-                            </td>
-                            <td style="width: 420px;">
-                                <a style="margin-right: 17%; color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
-                            </td>
-                            <td style="width: 30%;">
-                                <a style="color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
-                            </td>
-                            {% if user.is_superuser %}
-                                <td style="width: 10%;">
-                                    <a style="color:red;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+    <a href="{% url 'newtask' %}" class="botao flutuante"><i class="bi bi-calendar-plus"></i>Nova Tarefa</a> 
+        <!-- icone bi bi-calendar-plus copiado da pagina https://icons.getbootstrap.com/icons/calendar-plus/ -->
+            <ul class="task-list">
+                <table class="main-table">
+                    <div class="semtarefas">
+                        {% if semtarefas %}
+                            {{semtarefas}}
+                        {% endif %}
+                    </div>
+                    {% for tasks in Tasks_atrasadas %}
+                            <tr style="width: 100%;  font-size: 20px; height: 50px;  border-bottom: 1px dashed #CCC;">
+                                <td style="width: 25%">
+                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
                                 </td>
-                            {% endif %}
-                        </tr>
+                                <td style="width: 20%;">
+                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                                </td>
+                                <td style="width: 20%;">
+                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                                </td>
+                                {% if user.is_superuser %}
+                                    <td>
+                                        <a style="width: 20%; color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                    {% endfor %}
+                
+                {% for tasks in TasksDoDia %}
+                    <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 1px dashed #CCC;">
+                        <td style="width: 360px">
+                            <a style="padding-right: 30%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                        </td>
+                        <td style="width: 420px;">
+                            <a style="margin-right: 17%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                        </td>
+                        <td style="width: 30%;">
+                            <a style="color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                        </td>
+                        {% if user.is_superuser %}
+                            <td style="width: 10%;">
+                                <a style="color:green;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                    
+                {% for tasks in Tasks_futuras %}
+                    <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 1px dashed #CCC;" >
+                        <td style="width: 360px">
+                            <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                        </td>
+                        <td style="width: 420px;">
+                            <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                        </td>
+                        <td style="width: 30%;">
+                            <a style="color:blue; "href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                        </td>
+                        {% if user.is_superuser %}
+                            <td style="width: 10%;">
+                                <a style="color:blue;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                {% for tasks in Tasks_finalizadas %}
+                    <tr style="font-size: 20px; height: 50px;  border-bottom: 1px dashed #CCC;">
+                        <td style="width: 360px">
+                            <a style="padding-right: 30%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                        </td>
+                        <td style="width: 420px;">
+                            <a style="margin-right: 17%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                        </td>
+                        <td style="width: 30%;">
+                            <a style="color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                        </td>
+                        {% if user.is_superuser %}
+                            <td style="width: 10%;">
+                                <a style="color:grey;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                {% for tasks in Tasks_justificadas %}
+                    <tr style="font-size: 20px; height: 50px;  border-bottom: 1px dashed #CCC;">
+                        <td style="width: 360px">
+                            <a style="padding-right: 30%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                        </td>
+                        <td style="width: 420px;">
+                            <a style="margin-right: 17%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                        </td>
+                        <td style="width: 30%;">
+                            <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                        </td>
+                        {% if user.is_superuser %}
+                            <td style="width: 10%;">
+                                <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                            </td>
+                        {% endif %}
+                    </tr>
                 {% endfor %}
             
-            {% for tasks in TasksDoDia %}
-                <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;">
-                    <td style="width: 360px">
-                        <a style="padding-right: 30%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
-                    </td>
-                    <td style="width: 420px;">
-                        <a style="margin-right: 17%; color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
-                    </td>
-                    <td style="width: 30%;">
-                        <a style="color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
-                    </td>
-                    {% if user.is_superuser %}
-                        <td style="width: 10%;">
-                            <a style="color:green;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-                
-            {% for tasks in Tasks_futuras %}
-                <tr style="font-size: 20px; height: 50px; padding-top: 10px; border-bottom: 3px dashed #CCC;" >
-                    <td style="width: 360px">
-                        <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
-                    </td>
-                    <td style="width: 420px;">
-                        <a style=color:blue; href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
-                    </td>
-                    <td style="width: 30%;">
-                        <a style="color:blue; "href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
-                    </td>
-                    {% if user.is_superuser %}
-                        <td style="width: 10%;">
-                            <a style="color:blue;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-
-            {% for tasks in Tasks_finalizadas %}
-                <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
-                    <td style="width: 360px">
-                        <a style="padding-right: 30%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
-                    </td>
-                    <td style="width: 420px;">
-                        <a style="margin-right: 17%; color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
-                    </td>
-                    <td style="width: 30%;">
-                        <a style="color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
-                    </td>
-                    {% if user.is_superuser %}
-                        <td style="width: 10%;">
-                            <a style="color:grey;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-
-            {% for tasks in Tasks_justificadas %}
-                <tr style="font-size: 20px; height: 50px;  border-bottom: 3px dashed #CCC;">
-                    <td style="width: 360px">
-                        <a style="padding-right: 30%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
-                    </td>
-                    <td style="width: 420px;">
-                        <a style="margin-right: 17%; color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
-                    </td>
-                    <td style="width: 30%;">
-                        <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
-                    </td>
-                    {% if user.is_superuser %}
-                        <td style="width: 10%;">
-                            <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-          
-        </table>
-        </ul>
-       
+            </table>
+            </ul>
+        
+        </div>
     </div>
-</div>
+</body>
 {% endblock %}

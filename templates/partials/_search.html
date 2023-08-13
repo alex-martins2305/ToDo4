@@ -1,8 +1,8 @@
 <div class="form_search">
-    <form action="{% url 'search' %}" method="POST" >
+    <form action="{% url 'search' %}" method="post" >
         {% csrf_token %}
         <div>
-            <input name="input_search" >
+            <input name="input_search" type="search" placeholder="buscar" aria-label="Search">
             <button type="submit" class="btn btn-light menu_lupa">
                 <i class="bi bi-search"></i> <!--copied from https://icons.getbootstrap.com/icons/search/-->
             </button>

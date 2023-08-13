@@ -31,15 +31,22 @@
                         <a href="{% url 'logout' %}">Sair</a>
                     </div>
                 </li>
+                {% if  user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'admin:index' %}" >Admin</a>
+                    </li>
+                {% endif %}
             </ul>
-            <form  class="d-flex" >
+            <!-- <form  class="d-flex" > class t-flex faz o formulário submeter com method get, independente ser escolhido o method post. -->
                 {% include 'partials/_search.html' %}
-            </form>
+            <!-- </form> -->
         </div>
     </div>
 </nav>
 
-<div class="segundo_menu">
-    {% include 'partials/_choice_user.html' %}
-</div>
+    {% if  user.is_superuser %}
+        <div class="segundo_menu">
+            {% include 'partials/_choice_user.html' %}
+        </div>
+    {% endif %} 
 {% endif %}
