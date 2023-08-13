@@ -77,12 +77,12 @@ def tasksAtrasadas(request):
            
             return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'atrasadas': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
-            if int(Tasks_atrasadasTodas.count())==0:
+            Tasks_atrasadas=atrasadas_by_user_notInit_Init(name_logado)
+            if int(Tasks_atrasadas.count())==0:
                 tarefas="Você ainda não tem tarefas atrasadas."
             else:
                 tarefas=""
                 # verifica se o total dos três tipos de tarefas é zero e envia ao template.
-            Tasks_atrasadas=atrasadas_by_user_notInit_Init(name_logado)
             return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas,'atrasadas': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
