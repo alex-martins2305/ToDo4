@@ -5,65 +5,68 @@
 
 <body>
     <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
-    <h1>Tarefa</h1>
-    <h3>{{task.titulo}}</h3>
-    <h3>{{task.descricao}}</h3>
-    <h3>{{task.status}}</h3>
+    <div class="tarefa_main">
+        <div class="dados_basicos">
+            <div class="titulo_tarefa_clicada">{{task.titulo}}</div>
+            <div class="descricao_tarefa_clicada">Descrição: {{task.descricao}}</div>
+            <div class="status_tarefa_clicada">Tarefa {{task.etapas}} em {{task.start_at}}.</div>
+        </div>
 
-    <div>
-        {% if task.etapas == "não iniciada" %}
-            <form action="{% url 'initTask' %}" method="POST">
-                {% csrf_token %}
-                <input value={{task.id}} name="task_id" type="hidden">
-                <button class="btn btn-success" type="submit">INICIAR</button>
-            </form>
-            <form action="{% url 'justifyTask' %}" method="POST">
-                {% csrf_token %}
-                <input value={{task.id}} name="task_id" type="hidden">
-                <button class="btn btn-warning" type="submit">JUSTIFICAR</button>
-            </form>
-        {% else %}
-            {% if task.etapas == "iniciada" %}
-                <div>
-                    TAREFA INICIADA EM {{task.start_at}}. 
-                    <form action="{% url 'finishTask' %}" method="POST">
+        <div class="controles_da_tarefas">
+            {% if task.etapas == "não iniciada" %}
+                <div class="botoes_iniciar_justificar">
+                    <form action="{% url 'initTask' %}" method="POST">
                         {% csrf_token %}
                         <input value={{task.id}} name="task_id" type="hidden">
-                        <button class="btn btn-primary" type="submit">FINALIZAR</button>
+                        <button class="btn btn-success btn_iniciar1" type="submit">INICIAR</button>
                     </form>
                     <form action="{% url 'justifyTask' %}" method="POST">
                         {% csrf_token %}
                         <input value={{task.id}} name="task_id" type="hidden">
-                        <button class="btn btn-warning" type="submit">JUSTIFICAR</button>
+                        <button class="btn btn-warning btn_justificar1" type="submit">JUSTIFICAR</button>
                     </form>
                 </div>
-                {% include 'partials/_obs.html' %}
             {% else %}
-                {% if task.etapas == "finalizada" %}
-                    <div>
-                        TAREFA INICIADA EM {{task.start_at}} e FINALIZADA EM {{task.finished_at}}
+                {% if task.etapas == "iniciada" %}
+                    <div class="botoes_finalizar_justificar">
+                        <form action="{% url 'finishTask' %}" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-primary" type="submit">FINALIZAR</button>
+                        </form>
+                        <form action="{% url 'justifyTask' %}" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-warning btn_justificar1" type="submit">JUSTIFICAR</button>
+                        </form>
                     </div>
-                    <div>
-                        {{task.obs}}
-                    </div>
+                    {% include 'partials/_obs.html' %}
                 {% else %}
-                    {% if task.etapas == "quase_justificada" %}
-                        {% if not task.obs %}
-                            ATENÇÃO!!! Para finalizar a justificativa digite uma observação e clique em salvar.
-                            {% include 'partials/_obs.html' %}
-                        {% endif %}
+                    {% if task.etapas == "finalizada" %}
+                        <div>
+                            TAREFA INICIADA EM {{task.start_at}} e FINALIZADA EM {{task.finished_at}}
+                        </div>
+                        <div class="texto_obs">
+                            Observações: {{task.obs}}
+                        </div>
                     {% else %}
-                        <div>
-                            TAREFA JUSTIFICADA EM  {{task.update_at}}.
-                        </div>
-                        <div>
-                            {{task.obs}}
-                        </div>
+                        {% if task.etapas == "quase_justificada" %}
+                            {% if not task.obs %}
+                                ATENÇÃO!!! Para finalizar a justificativa digite uma observação e clique em salvar.
+                                {% include 'partials/_obs.html' %}
+                            {% endif %}
+                        {% else %}
+                            <div>
+                                TAREFA JUSTIFICADA EM  {{task.update_at}}.
+                            </div>
+                            <div>
+                                {{task.obs}}
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </div>
-
 </body>
 {% endblock %}

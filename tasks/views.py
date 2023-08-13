@@ -31,7 +31,7 @@ def dashboard(request):
                 Tasks_futurasTodas=func_all_futuras()
                 
             if int(Tasks_atrasadasTodas.count())+int(TasksDoDiaTodas.count())+int(Tasks_futurasTodas.count()) ==0:
-                tarefas="Você ainda não cadastrou suas tarefas. Para começar clique no botão Nova Tarefa."
+                tarefas="Nenhum usuário com tarefas cadastradas, para criar uma tarefa clique no botão Nova Tarefa."
             else:
                 tarefas=""
                 # verifica se o total dos três tipos de tarefas é zero e envia ao template.
@@ -68,11 +68,22 @@ def tasksAtrasadas(request):
                 tasks_atrasadas_by_user(name)
             else:
                 Tasks_atrasadasTodas=all_atrasadas_iniciada_naoIniciada()
+
+            if int(Tasks_atrasadasTodas.count())==0:
+                tarefas="Nenhum usuário com tarefas atrasadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
            
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'atrasadas': titulo,'usuarios':choices } )
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'atrasadas': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
+            if int(Tasks_atrasadasTodas.count())==0:
+                tarefas="Você ainda não tem tarefas atrasadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
             Tasks_atrasadas=atrasadas_by_user_notInit_Init(name_logado)
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas,'atrasadas': titulo} )
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas,'atrasadas': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
     
@@ -94,11 +105,21 @@ def tasksDoDia(request):
                 TasksDoDiaTodas=tasks_dodia_by_user(name)
             else: 
                 TasksDoDiaTodas=all_dodia_iniciada_naoIniciada()
+            if int(TasksDoDiaTodas.count())==0:
+                tarefas="Nenhum usuário com tarefas para hoje."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
            
-            return render(request, 'tasks/dashboard.html', {'TasksDoDia':TasksDoDiaTodas, 'dodia': titulo,'usuarios':choices } )
+            return render(request, 'tasks/dashboard.html', {'TasksDoDia':TasksDoDiaTodas, 'dodia': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
             TasksDoDia=dodia_by_user_notInit_Init(name_logado)
-            return render(request, 'tasks/dashboard.html', {'TasksDoDia':TasksDoDia,'dodia': titulo} )
+            if int(TasksDoDia.count())==0:
+                tarefas="Você não tem tarefas para hoje."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+            return render(request, 'tasks/dashboard.html', {'TasksDoDia':TasksDoDia,'dodia': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
         
@@ -116,15 +137,27 @@ def tasksFuturas(request):
                 name = request.POST['user']
             except:
                 name=""
+
             if name!=""and name!="Filtrar por usuário":
                 Tasks_futurasTodas=tasks_futuras_by_user(name)
             else:
                 Tasks_futurasTodas=all_futuras_iniciada_naoIniciada()
-           
-            return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futurasTodas, 'futuras': titulo,'usuarios':choices } )
+
+            if int(Tasks_futurasTodas.count())==0:
+                tarefas="Nenhum usuário com tarefas futuras."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+
+            return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futurasTodas, 'futuras': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
             Tasks_futuras=futuras_by_user_notInit_Init(name_logado)
-            return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futuras,'futuras': titulo} )
+            if int(Tasks_futuras.count())==0:
+                tarefas="Você não tem tarefas futuras."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+            return render(request, 'tasks/dashboard.html', {'Tasks_futuras':Tasks_futuras,'futuras': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
 
@@ -148,11 +181,24 @@ def tasksFinalizadas(request):
                 Tasks_finalizadasTodas=finalizadas_by_user(name)
             else:
                 Tasks_finalizadasTodas=all_finalizadas()
-           
-            return render(request, 'tasks/dashboard.html', {'Tasks_finalizadas':Tasks_finalizadasTodas, 'finalizadas': titulo,'usuarios':choices } )
+
+            if int(Tasks_finalizadasTodas.count())==0:
+                tarefas="Nenhum usuário com tarefas finalizadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+
+            return render(request, 'tasks/dashboard.html', {'Tasks_finalizadas':Tasks_finalizadasTodas, 'finalizadas': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
             Tasks_finalizadas=finalizadas_by_user(name_logado)
-            return render(request, 'tasks/dashboard.html', {'Tasks_finalizadas':Tasks_finalizadas,'finalizadas': titulo} )
+
+            if int(Tasks_finalizadas.count())==0:
+                tarefas="Você não tem tarefas finalizadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+                
+            return render(request, 'tasks/dashboard.html', {'Tasks_finalizadas':Tasks_finalizadas,'finalizadas': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
     
@@ -174,11 +220,24 @@ def tasksJustificadas(request):
                 Tasks_justificadasTodas=justificadas_by_user(name)
             else:
                 Tasks_justificadasTodas=all_justificadas()
-           
-            return render(request, 'tasks/dashboard.html', {'Tasks_justificadas':Tasks_justificadasTodas, 'justificadas': titulo,'usuarios':choices } )
+
+            if int(Tasks_justificadasTodas.count())==0:
+                tarefas="Nenhum usuário com tarefas justificadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+                
+            return render(request, 'tasks/dashboard.html', {'Tasks_justificadas':Tasks_justificadasTodas, 'justificadas': titulo,'usuarios':choices, 'semtarefas':tarefas } )
         else:
             Tasks_justificadas=justificadas_by_user(name_logado)
-            return render(request, 'tasks/dashboard.html', {'Tasks_justificadas':Tasks_justificadas,'justificadas': titulo} )
+
+            if int(Tasks_justificadas.count())==0:
+                tarefas="Você não tem tarefas justificadas."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+
+            return render(request, 'tasks/dashboard.html', {'Tasks_justificadas':Tasks_justificadas,'justificadas': titulo, 'semtarefas':tarefas} )
     else:
         return redirect ('login')
     
@@ -206,9 +265,23 @@ def tasksTodas(request):
             choices.append(list_element)
 
         if request.user.is_superuser:
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'TasksDoDia':TasksDoDiaTodas, 'Tasks_futuras':Tasks_futurasTodas, 'dashboards': titulo} )
+
+            if int(Tasks_atrasadasTodas.count())+int(TasksDoDiaTodas.count())+int(Tasks_futurasTodas.count())==0:           
+                tarefas="Nenhum usuário com tarefas cadastradas"
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadasTodas, 'TasksDoDia':TasksDoDiaTodas, 'Tasks_futuras':Tasks_futurasTodas, 'dashboards': titulo, 'semtarefas':tarefas} )
         else:
-            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'dashboards': titulo} )
+
+            if int(Tasks_atrasadas.count())+int(TasksDoDia.count())+int(Tasks_futuras.count())==0:           
+                tarefas="Você ainda não cadastrou suas tarefas. Para começar clique no botão Nova Tarefa."
+            else:
+                tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
+
+            return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'dashboards': titulo, 'semtarefas':tarefas} )
 
     else:
         return redirect ('login')
@@ -295,15 +368,12 @@ def newTask(request):
             return render(request, "tasks/newtask.html", {'form':form})
         else:
             task=Task.objects.create(pessoa=user, nome_pessoa=nome_pessoa, titulo=titulo, descricao=descricao, need_init_at=datetime_obj)
-            task.save()
-        #print(titulo, " ", descricao, "  ", need_init_at, " ", datetime_obj)
-        #task=Task.objects.create(pessoa= user, tituto=titulo, descricao=descricao, need_init_at=need_init_at)   
+            task.save() 
         return redirect ('dashboard')
     else:
         return render(request, "tasks/newtask.html", {'form':form})
 
 def search (request):
-    print("Função search sendo executada.")
     if request.user.is_authenticated:
         id = request.user.id
         name_logado=request.user.username
@@ -312,7 +382,6 @@ def search (request):
         all_atrasadas=func_all_atrasadas()
         all_dodia=func_all_dodia()
         all_futuras=func_all_futuras()
-        print('SuperUser selecionada todas tarefas')
     else:
         all_atrasadas=tasks_atrasadas_by_user(name_logado)
         all_dodia = tasks_dodia_by_user(name_logado)
