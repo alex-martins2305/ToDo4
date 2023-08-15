@@ -42,7 +42,7 @@ def dashboard(request):
             TasksDoDia=dodia_by_user_notInit_Init(name_logado) 
             Tasks_futuras=futuras_by_user_notInit_Init(name_logado)
             if int(Tasks_atrasadas.count())+int(TasksDoDia.count())+int(Tasks_futuras.count()) ==0:
-                tarefas="Você ainda não cadastrou suas tarefas. Para começar clique no botão Nova Tarefa."
+                tarefas=name_logado+" ainda não tem tarefas."
             else:
                 tarefas=""
 
@@ -65,7 +65,7 @@ def tasksAtrasadas(request):
             except:
                 name=""
             if name!=""and name!="Filtrar por usuário":
-                tasks_atrasadas_by_user(name)
+                Tasks_atrasadasTodas=tasks_atrasadas_by_user(name)
             else:
                 Tasks_atrasadasTodas=all_atrasadas_iniciada_naoIniciada()
 
@@ -404,13 +404,19 @@ def search (request):
         TasksDoDia=search_in_doDia
     
         Tasks_futuras=search_in_futuras
+
+        if int(Tasks_atrasadas.count())+int(TasksDoDia.count())+int(Tasks_futuras.count())==0:
+            tarefas="Nenhuma tarefa contendo a palavra "+name_to_search.upper()+"."
+        else:
+            tarefas=""
+                # verifica se o total dos três tipos de tarefas é zero e envia ao template.
     else:
         titulo="Sua busca por "+name_to_search+" não encontrou resultados."
         Tasks_atrasadas=""
         TasksDoDia=""
         Tasks_futuras=""
 
-    return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'search': titulo} )
+    return render(request, 'tasks/dashboard.html', {'Tasks_atrasadas':Tasks_atrasadas, 'TasksDoDia':TasksDoDia, 'Tasks_futuras':Tasks_futuras, 'search': titulo,'semtarefas':tarefas } )
 
 def teste(request):
     return render(request, 'teste.html')

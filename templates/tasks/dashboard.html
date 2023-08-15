@@ -5,7 +5,7 @@
 <body>
     <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
 
-    <a href="{% url 'newtask' %}" class="botao flutuante"><i class="bi bi-calendar-plus"></i> Nova Tarefa</a> 
+    <a href="{% url 'newtask' %}" class="botao flutuante botao_flutuante"><i class="bi bi-calendar-plus"></i>Nova Tarefa</a> 
         <!-- icone bi bi-calendar-plus copiado da pagina https://icons.getbootstrap.com/icons/calendar-plus/ -->
             <ul class="task-list">
                 <table class="main-table">
@@ -15,19 +15,19 @@
                         {% endif %}
                     </div>
                     {% for tasks in Tasks_atrasadas %}
-                            <tr style="width: 100%;  font-size: 20px; height: 50px;  border-bottom: 1px dashed #CCC;">
-                                <td style="width: 25%">
-                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
+                            <tr class="linha_atrasadas">
+                                <td class="col_atradas1">
+                                    <a class="link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.titulo}}</a>
                                 </td>
-                                <td style="width: 20%;">
-                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
+                                <td class="col_atradas2">
+                                    <a class="link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.need_init_at}}</a>
                                 </td>
-                                <td style="width: 20%;">
-                                    <a style="color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
+                                <td class="col_atradas3">
+                                    <a class="link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                                 </td>
                                 {% if user.is_superuser %}
                                     <td>
-                                        <a style="width: 20%; color:#FF4500;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
+                                        <a class="col_atrasadas2 link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                                     </td>
                                 {% endif %}
                             </tr>

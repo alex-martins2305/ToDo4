@@ -10,7 +10,6 @@ users = User.objects.all()
 class newTaskForm(forms.Form):
     choices=[('Escolha o responsável', 'Escolha o responsável')]
     for user in users:
-        print(user)
         list_element=(user.username, user.username)
         choices.append(list_element)
     titulo=forms.CharField(label='Titulo', widget=forms.TextInput(attrs={"class": "form-control",}))
