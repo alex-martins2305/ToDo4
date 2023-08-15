@@ -26,11 +26,12 @@
                                     <a class="link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                                 </td>
                                 {% if user.is_superuser %}
-                                    <td>
+                                    <td class="col_user_superuser">
                                         <a class="col_atrasadas2 link_atrasadas" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                                     </td>
                                 {% endif %}
                             </tr>
+                        
                     {% endfor %}
                 
                 {% for tasks in TasksDoDia %}
@@ -45,7 +46,7 @@
                             <a style="color:green;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                         </td>
                         {% if user.is_superuser %}
-                            <td style="width: 10%;">
+                            <td class="col_user_superuser" style="width: 10%;">
                                 <a style="color:green;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                             </td>
                         {% endif %}
@@ -64,7 +65,7 @@
                             <a style="color:blue; "href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                         </td>
                         {% if user.is_superuser %}
-                            <td style="width: 10%;">
+                            <td class="col_user_superuser" style="width: 10%;">
                                 <a style="color:blue;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                             </td>
                         {% endif %}
@@ -83,7 +84,7 @@
                             <a style="color:gray;"href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                         </td>
                         {% if user.is_superuser %}
-                            <td style="width: 10%;">
+                            <td class="col_user_superuser" style="width: 10%;">
                                 <a style="color:grey;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                             </td>
                         {% endif %}
@@ -102,7 +103,7 @@
                             <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.etapas}}</a>
                         </td>
                         {% if user.is_superuser %}
-                            <td style="width: 10%;">
+                            <td class="col_user_superuser" style="width: 10%;">
                                 <a style="color:violet;" href="{% url 'taskview' tasks.id %}">{{tasks.nome_pessoa|capfirst}}</a>
                             </td>
                         {% endif %}
