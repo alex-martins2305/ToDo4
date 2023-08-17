@@ -9,8 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" , initial-scale="1.0">
     <title>Alex ToDo4</title>
-    
-    {% include 'partials/_stylescss.html' %} <!--include this line because external css isn't load in production-->
+
+    <!--include this line because external css isn't load in production-->
+    <style>
+        {% include 'partials/CSS/_maincss.html' %} 
+        {% include 'partials/CSS/_css_mobile.html' %}
+        {% include 'partials/CSS/_css_desktop.html' %}
+    </style>
 
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" >    
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'ccs/styles.css' %}"> -->
