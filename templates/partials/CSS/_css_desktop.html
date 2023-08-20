@@ -1,9 +1,24 @@
 @media (min-width: 992px){
+    /* LOGIN */
+    .containe_login, .containe_register,  {
+            width: 100%;
+            max-width: 50rem;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+    }
+    .containe_login {
+        max-height: 33rem;
+    }
+    .containe_register {
+        max-height: 45rem;
+    }
+
+    /* MENU */
     .menu_lupa{
         margin-bottom: 0.4rem;
         max-height: 1.7rem;
         }
-
     .form_search {
         margin-top: 1rem;
     }
@@ -11,21 +26,17 @@
         background-color: transparent !important;
         max-width: 10px;
     }
-    
-    .row_atrasadas{
+    .row_atrasadas,.row_dodia, .row_futuras, .row_finalizadas, .row_justificadas  {
         display: flex;
         align-items: center;
         border-bottom: 1px dashed #CCC;
         margin-bottom: 1rem;
-        color:#FF4500;
-        font-size: 18pt;
-    }
-    .row_dodia {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px dashed #CCC;
-        margin-bottom: 1rem;
-        color:blue;
         font-size: 25pt;
     }
+    
+/* NOVA TAREFA */
+    #id_titulo_label, #id_descricao_label, #id_need_init_at_label, #id_pessoa_label {
+        font-size: 2rem;
+    }
+
 }

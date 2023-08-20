@@ -10,7 +10,7 @@
     {% include 'partials/_alerts.html'%}
 
     <section class='container col-8'>
-        <form action="#" method='POST'>
+        <form class="form_new_task" action="#" method='POST'>
             {% csrf_token %}
             {% for field in form.visible_fields %}
                 {% for error in field.errors %}
@@ -24,12 +24,9 @@
                 </div>
             {% endfor %}
             <div class="container_controls"> 
-                <div class="control_btns">
-                    <input type='submit' value="Cadastrar" class="btn btn-success">
-                    <a href="{% url 'login' %}" type="button" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </div>
-           
+                <input type='submit' value="Cadastrar" class="my_btn btn-success btn_cadastrar">
+                <a href="{% url 'login' %}" type="button" class="my_btn btn-secondary btn_cancelar">Cancelar</a>
+            </div>    
         </form>   
     </section> 
 </body>

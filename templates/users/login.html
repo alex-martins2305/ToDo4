@@ -6,7 +6,7 @@
   <!-- MELHOR DEFINIR O BODY EM CADA HTML, DEIXANDO DE FORA DO BASE.HTML, ASSIM É POSSIVEL DEFINIR PROPRIEDADES ESPECIFICAS DE CADA PÁGINA, POR EXEMPLO: overflow: hidden. -->
 
   <div class="page">
-    <div class="containe">
+    <div class="containe_login">
       <div class="formulario">
         <!-- HEADER -->
         <div class="header">
@@ -18,15 +18,16 @@
           {% csrf_token %}
           <div class="input">
             <i class="fa fa-user icone"></i>
-            <input  name="email_user" placeholder="nome ou Email">
+            <input class="my_login_input" name="email_user" placeholder="nome ou Email">
           </div>
-          <div class="input">
+          <div class="input my_login_input">
             <i class="fa fa-lock icone"></i>
             <input type="password" id="login-password" name="password" placeholder="Senha">
           </div>
-        
-          <input type="submit" name="login" value="Login" class="btn btn-login">
-          <a href="{% url 'signup' %}" class="btn btn-registrar">Cadastro</a>
+          <div class="login_controls">
+            <input type="submit" name="login" value="Login" class="btn btn-login">
+            <a href="{% url 'signup' %}" class="btn btn-registrar">Cadastro</a>
+          </div>
         </form>
         
       </div>

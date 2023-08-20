@@ -1,4 +1,43 @@
 @media (max-width: 991px) {
+    /* LOGIN */
+    .formulario .header h3, .formulario_register .header h3 {
+        font-weight: lighter;
+        font-size: 6rem;
+        margin: 15px 0;
+        text-align:center;
+    }
+    .formulario .icone, .formulario_register .icone {
+        width: 70px;
+        height: 70px;
+        vertical-align: top;
+        margin-top: 1.2rem;
+        margin-right:1rem;
+        border: 0;
+        padding: 0;
+    }
+    .formulario .input input, .formulario_register .input input {
+        width: 85%;
+        padding: 2rem;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+    .formulario .btn-login, .formulario_register .btn-login {
+        background: #2f7fd6;
+        color: #FFFFFF;
+        margin-top: 5rem;
+        width: 100%;
+        height: 7rem;
+        font-size:4rem;
+    }
+    .formulario .btn-registrar, .formulario_register .btn-registrar, .formulario_register .btn-cancelar {
+        background: #dbdbdb;
+        color: #676464;
+        text-decoration: none;
+        margin-top: 3rem;
+        height: 7rem;
+        font-size:4rem;
+    }
+    /* DASHBOARD */
     .main_menu, .btn_sanduiche, .link_sair{
         font-size: 3.5rem;
     }
@@ -54,31 +93,52 @@
         align-items: center;
         border-bottom: 3px inset #CCC;
         margin-bottom: 1rem;
-        color:#FF4500;
         font-size: 35pt;
         <!-- text-decoration: none; -->
     }
-    .row_dodia {
-        color:yellow;
-    }
-    .row_futuras {
-        color:blue;
-    }   
-    .row_finalizadas {
-        color:gray;
-    }
-    .row_justificadas {
-        color:purple;
-    }
+   
     .paragrafo_titulo {
         min-height: 120px;
         display: flex;
         align-items: center;
     }
     .paragrafo_inicio, .paragrafo_etapas {
-        font-size: 18pt;
+        font-size: 28pt;
     }
     .paragrafo_user {
         display: none;
     }  
+    /* NOVA TAREFA */
+    .label_nova_tarefa {
+        font-size: 55pt;
+        color: darkturquoise;
+        margin-top: 3%;
+        margin-bottom: 5%;
+    }
+    #id_titulo_label, #id_descricao_label, #id_need_init_at_label, #id_pessoa_label {
+        font-size: 4rem;
+    }
+    #id_titulo, #id_descricao, #id_need_init_at, #id_pessoa {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        width:100%;
+    }
+    #id_descricao {
+        height: 20rem;
+    }
+    #id_pessoa {
+       width:60%;
+    }
+    .container_controls {
+        display: inline;
+        align-items:center;
+    }
+    .btn_cadastrar, .btn_cancelar {
+        border-radius: 1rem;
+        font-size: 3rem;
+        width: 100%;
+        margin-bottom: 1rem;
+        text-decoration:none;
+        text-align:center;
+    }       
 }

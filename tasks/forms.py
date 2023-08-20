@@ -8,19 +8,16 @@ User = get_user_model()
 users = User.objects.all()
 
 class newTaskForm(forms.Form):
-    choices=[('Escolha o responsável', 'Escolha o responsável')]
+    choices=[('', '')]
     for user in users:
         list_element=(user.username, user.username)
         choices.append(list_element)
-    titulo=forms.CharField(label='Titulo', widget=forms.TextInput(attrs={"class": "form-control",}))
-    descricao=forms.CharField(label='descricao', widget=forms.TextInput(attrs={"class": "form-control",}))
-    need_init_at = forms.DateField(label='Começa em:', widget=forms.widgets.DateInput(attrs={'type': 'date', 'placeholder': 'dd-mm-yyyy (DOB)', }))  
+    titulo=forms.CharField(label='Título', widget=forms.TextInput(attrs={"class": "form-control",}))
+    descricao=forms.CharField(label='descrição', widget=forms.TextInput(attrs={"class": "form-control",}))
+    need_init_at = forms.DateField(label='Começa em:', widget=forms.widgets.DateInput(attrs={'type': 'date',}))  
     # https://www.letscodemore.com/blog/how-to-add-date-input-widget-in-django-forms/
 
     pessoa=forms.CharField(label='Pessoa:', widget=forms.Select(choices=choices))
-
-    
-   
 
     class Meta:
         model= Task
@@ -42,9 +39,9 @@ class newTaskForm(forms.Form):
         return self.cleaned_data
 
 class newTaskForm2(forms.Form):
-    titulo=forms.CharField(label='Titulo', widget=forms.TextInput(attrs={"class": "form-control",}))
-    descricao=forms.CharField(label='descricao', widget=forms.TextInput(attrs={"class": "form-control",}))
-    need_init_at = forms.DateField(label='Começa em:', widget=forms.widgets.DateInput(attrs={'type': 'date', 'placeholder': 'dd-mm-yyyy (DOB)', }))  
+    titulo=forms.CharField(label='Título', widget=forms.TextInput(attrs={"class": "form-control",}))
+    descricao=forms.CharField(label='descrição', widget=forms.TextInput(attrs={"class": "form-control",}))
+    need_init_at = forms.DateField(label='Começa em:', widget=forms.widgets.DateInput(attrs={'type': 'date',}))  
         # https://www.letscodemore.com/blog/how-to-add-date-input-widget-in-django-forms/
 
     class Meta:
