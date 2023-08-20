@@ -15,9 +15,9 @@
                         {% endif %}
                     </div>
                     {% for tasks in Tasks_atrasadas %}
-                        <a href="{% url 'taskview' tasks.id %}"> 
+                        <a class="row_with_link" href="{% url 'taskview' tasks.id %}"> 
                             <div class="row_atrasadas">
-                                <div class="paragrafo_titulo">{{tasks.titulo}} </div>
+                                <div style="text-decoration: none;" class="paragrafo_titulo">{{tasks.titulo}} </div>
                                 <div class="paragrafo_inicio">{{tasks.need_init_at|date:"d/m/Y" }}</div>
                                 <div class="paragrafo_etapas">{{tasks.etapas}}</div>
                                 <div class="paragrafo_user">{% if user.is_superuser %}{{tasks.nome_pessoa|capfirst}}{%endif%}</div>
@@ -27,7 +27,7 @@
                     
                 
                 {% for tasks in TasksDoDia %}
-                    <a href="{% url 'taskview' tasks.id %}"> 
+                    <a  class="row_with_link" href="{% url 'taskview' tasks.id %}"> 
                         <div class="row_dodia">
                             <div class="paragrafo_titulo">{{tasks.titulo}} </div>
                             <div class="paragrafo_inicio">{{tasks.need_init_at|date:"d/m/Y" }}</div>
@@ -38,7 +38,7 @@
                 {% endfor %}
                     
                 {% for tasks in Tasks_futuras %}
-                    <a href="{% url 'taskview' tasks.id %}"> 
+                    <a class="row_with_link" href="{% url 'taskview' tasks.id %}"> 
                         <div class="row_futuras">
                             <div class="paragrafo_titulo">{{tasks.titulo}} </div>
                             <div class="paragrafo_inicio">{{tasks.need_init_at|date:"d/m/Y" }}</div>
@@ -49,7 +49,7 @@
                 {% endfor %}
 
                 {% for tasks in Tasks_finalizadas %}
-                    <a href="{% url 'taskview' tasks.id %}"> 
+                    <a class="row_with_link" href="{% url 'taskview' tasks.id %}"> 
                         <div class="row_finalizadas">
                             <div class="paragrafo_titulo">{{tasks.titulo}} </div>
                             <div class="paragrafo_inicio">{{tasks.need_init_at|date:"d/m/Y" }}</div>
@@ -60,7 +60,7 @@
                 {% endfor %}
 
                 {% for tasks in Tasks_justificadas %}
-                    <a href="{% url 'taskview' tasks.id %}"> 
+                    <a class="row_with_link" href="{% url 'taskview' tasks.id %}"> 
                         <div class="row_justificadas">
                             <div class="paragrafo_titulo">{{tasks.titulo}} </div>
                             <div class="paragrafo_inicio">{{tasks.need_init_at|date:"d/m/Y" }}</div>

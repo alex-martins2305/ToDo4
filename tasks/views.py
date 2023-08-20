@@ -420,3 +420,6 @@ def search (request):
 
 def teste(request):
     return render(request, 'teste.html')
+
+def compra(request):
+    return render(request, 'compra.html')

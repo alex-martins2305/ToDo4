@@ -65,9 +65,6 @@
     }
 
     /* MENU */
-
-
-
     .segundo_menu {
         width: 100%;
         text-align: center; 
@@ -223,7 +220,6 @@
         background-color:#333333;
         margin-left: 5%;
         margin-right: 5%;
-        /* display: flex; */
         align-items: center;
     }
 
@@ -241,7 +237,7 @@
         width: 40%;
         text-align: left;
     }
-     .semtarefas {
+    .semtarefas {
         width: 100%;
         color:#CCCCCC;
         font-size: 1.8rem;
@@ -268,37 +264,39 @@
     color: #aaa;
     line-height: 25px;
     }
+.row_with_link {
+    text-decoration: none;
+    }
    
    /* BOTÃO FLUTUANTE */
-   .botao {  
-
-display: inline-block;  
-padding: 0.8em 1.2em;   
-margin-left: 5%; 
-background-color:#0987D2;  
-text-decoration: none;  
-color: #ffffff;
-border-radius:50px;
-font-family:'open_sansregular';  
+.botao {  
+    display: inline-block;  
+    padding: 0.8em 1.2em;   
+    margin-left: 5%; 
+    background-color:#0987D2;  
+    text-decoration: none;  
+    color: #ffffff;
+    border-radius:50px;
+    font-family:'open_sansregular';  
 } 
  
 .flutuante {  
-display: inline-block;  
--webkit-transition-duration: 0.4s;  
-transition-duration: 0.4s;  
--webkit-transition-property: -webkit-transform;  
-transition-property: transform;  
--webkit-transform: translateZ(0);  
--ms-transform: translateZ(0);  
-transform: translateZ(0);  
-box-shadow: 0px 4px 2px 0px rgba(98, 98, 98, 0.69);
+    display: inline-block;  
+    -webkit-transition-duration: 0.4s;  
+    transition-duration: 0.4s;  
+    -webkit-transition-property: -webkit-transform;  
+    transition-property: transform;  
+    -webkit-transform: translateZ(0);  
+    -ms-transform: translateZ(0);  
+    transform: translateZ(0);  
+    box-shadow: 0px 4px 2px 0px rgba(98, 98, 98, 0.69);
 }  
   
 .flutuante:hover {  
--webkit-transform: translateY(-5px);  
--ms-transform: translateY(-5px);  
-transform: translateY(-5px);
-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.69);  
+    -webkit-transform: translateY(-5px);  
+    -ms-transform: translateY(-5px);  
+    transform: translateY(-5px);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.69);  
 } 
 
 /* FORMULÁRIO NOVA TAREFA */
@@ -388,3 +386,8 @@ box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.69);
         display: none !important;
     }
     }
+
+.teste_de_link {
+    text-decoration: none;
+    color: red;
+}

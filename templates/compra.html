@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %} Lista de Tarefas {% endblock%}    
+{% block content%}
+
+    <style>
+        body {
+            background-color: blue;
+        }
+        .main_div {
+            display: flex;
+            align-content: center;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        .btn_sim {
+            margin-right: 20px;
+        }
+        .titulo {
+            color:black;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function mudaCor(){
+            btn= document.getElementById('btn_sim');
+            btn.innerText='Não'
+            }
+        
+
+    </script>
+</head>
+<body>
+    <h3 class="titulo">Compra uma moto nova pra mim?</h3>
+    <div class="main_div">  
+        <button type="button" class="btn_sim" id="btn_sim" onclick="mudaCor()">Sim</button>
+        <button class="btn_nao">Não</button>
+    </div>
+</body>
+{% endblock %}

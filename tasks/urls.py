@@ -17,6 +17,6 @@ urlpatterns = [
     path('dashboard/task_todas/', views.tasksTodas, name='tasksTodas'),
     path('dashboard/search/', views.search, name='search'),
     path('teste/', views.teste, name='teste'),
-
+    path('compra/', views.compra, name='compra'),
 
 ]
