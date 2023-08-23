@@ -1,6 +1,19 @@
 from .models import Task
 from datetime import date, datetime
 from django.contrib.auth import get_user_model
+import smtplib
+
+def send_email(email, titulo, descricao, need_init_at):
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login("todo4142@gmail.com", "gmtdzfcmfsenfhdj")
+    msgTo="alexsandropb3@gmail.com"
+    msgFrom="todo4142@gmail.com"
+    # print('Título: {}\n{}\nDeverá iniciar em {}.'.format(titulo, descricao, str(need_init_at)))
+    # server.sendmail(msgTo,msgFrom,'Titulo: {}'.format(titulo))
+    server.sendmail(msgFrom,msgTo,'Subject: Voce tem uma nova tarefa no ToDo4.\n\n{}\n\n{}\n\n Devera iniciar em {}.\n\nAcesse suas tarefas em https://todo4-hk3r.onrender.com'.format(titulo, descricao, str(need_init_at)))
+    server.quit()
+    return True
+
 
 def create_choices():
     User = get_user_model()

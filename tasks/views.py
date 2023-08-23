@@ -354,6 +354,9 @@ def newTask(request):
         # datetime_obj = datetime.strptime(need_init_at, '%d/%m/%Y')
         # a conversão acima não será mais necessária desde que a data é escolhida no datapicker, pois ja vem no formato datetime
         datetime_obj=need_init_at
+
+        data=need_init_at[8:10]+"/"+need_init_at[5:7]+"/"+need_init_at[2:4]
+        # print(data)
         # Uma vez convertida a data ficará no formato padrão 2017-12-29 00:00:00
 
         if request.user.is_superuser:
@@ -368,6 +371,8 @@ def newTask(request):
             return render(request, "tasks/newtask.html", {'form':form})
         else:
             task=Task.objects.create(pessoa=user, nome_pessoa=nome_pessoa, titulo=titulo, descricao=descricao, need_init_at=datetime_obj)
+            email=user.email
+            send_email(email, titulo, descricao, data)
             task.save() 
         return redirect ('dashboard')
     else:

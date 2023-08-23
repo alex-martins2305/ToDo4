@@ -3,6 +3,10 @@ from decouple import config
 import os
 import dj_database_url
 
+# email used to send messages when a new task was created: todo4142@gmail.com
+# password: @Pi141592
+# password to access from app: lcajmgkxrgzezthf
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR2=Path(__file__).resolve().parent
