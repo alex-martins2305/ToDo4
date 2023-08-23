@@ -6,7 +6,7 @@ import smtplib
 def send_email(email, titulo, descricao, need_init_at):
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.login("todo4142@gmail.com", "gmtdzfcmfsenfhdj")
-    msgTo="alexsandropb3@gmail.com"
+    msgTo=email
     msgFrom="todo4142@gmail.com"
     # print('Título: {}\n{}\nDeverá iniciar em {}.'.format(titulo, descricao, str(need_init_at)))
     # server.sendmail(msgTo,msgFrom,'Titulo: {}'.format(titulo))
