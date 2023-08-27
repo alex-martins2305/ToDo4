@@ -296,7 +296,11 @@ def tasks(request):
     
 def taskview(request,task_id):
     task_clicada=get_object_or_404(Task, pk=task_id)
-    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
+    if request.user.is_superuser or request.user.username==task_clicada.nome_pessoa:
+        dono="dono"
+    else:
+        dono=""
+    return render(request, 'tasks/task_clicada.html', {'task':task_clicada, 'dono':dono})
 
 def initTask(request):
     if request.method == 'POST':
@@ -313,17 +317,6 @@ def finishTask(request):
     task_clicada=get_object_or_404(Task, pk=taskId)  
     task_clicada.etapas='finalizada'
     task_clicada.finished_at=date.today()
-    task_clicada.save()
-    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
-
-def saveTaskObs(request):
-    if request.method == 'POST':
-        taskId=request.POST['task_id']
-        obsText=request.POST['obsText']
-    task_clicada=get_object_or_404(Task, pk=taskId)  
-    task_clicada.obs=obsText
-    if task_clicada.etapas=='quase_justificada':
-        task_clicada.etapas='justificada'
     task_clicada.save()
     return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
 
@@ -378,6 +371,24 @@ def newTask(request):
     else:
         return render(request, "tasks/newtask.html", {'form':form})
 
+def saveTaskObs(request):
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+        obsText=request.POST['obsText']
+    task_clicada=get_object_or_404(Task, pk=taskId)  
+    task_clicada.obs=obsText
+    if task_clicada.etapas=='quase_justificada':
+        task_clicada.etapas='justificada'
+    task_clicada.save()
+    return render(request, 'tasks/task_clicada.html', {'task':task_clicada})
+
+def deleteTask (request):
+    if request.method == 'POST':
+        taskId=request.POST['task_id']
+        task_clicada=get_object_or_404(Task, pk=taskId)
+        task_clicada.delete()
+        return redirect('dashboard')
+    
 def search (request):
     if request.user.is_authenticated:
         id = request.user.id
