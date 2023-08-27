@@ -8,6 +8,7 @@ urlpatterns = [
     path('dashboard/finish_task/', views.finishTask, name='finishTask'),
     path('dashboard/justify_task/', views.JustificyTask, name='justifyTask'),
     path('dashboard/save_task/', views.saveTaskObs, name='saveTaskObs'),
+    path('dashboard/delete_task/', views.deleteTask, name='deleteTask'),
     path('dashboard/new_task/', views.newTask, name='newtask'),
     path('dashboard/task_atrasadas/', views.tasksAtrasadas, name='tasksAtrasadas'),
     path('dashboard/tasks_do_dia/', views.tasksDoDia, name='tasksDoDia'),

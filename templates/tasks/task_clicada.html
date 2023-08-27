@@ -25,6 +25,13 @@
                         <input value={{task.id}} name="task_id" type="hidden">
                         <button class="btn btn-warning btn_justificar1" type="submit">JUSTIFICAR</button>
                     </form>
+                    {% if dono %}  
+                        <form action="{% url 'deleteTask' %}" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-danger btn_apagar1" type="submit" onclick="window.cofirmacao()">APAGAR</button>
+                        </form>
+                    {% endif %}
                 </div>
             {% else %}
                 {% if task.etapas == "iniciada" %}
@@ -39,6 +46,13 @@
                             <input value={{task.id}} name="task_id" type="hidden">
                             <button class="btn btn-warning btn_justificar1" type="submit">JUSTIFICAR</button>
                         </form>
+                        {% if dono %}  
+                        <form action="{% url 'deleteTask' %}" method="POST">
+                            {% csrf_token %}
+                            <input value={{task.id}} name="task_id" type="hidden">
+                            <button class="btn btn-danger btn_apagar1" type="submit" onclick="window.cofirmacao()">APAGAR</button>
+                        </form>
+                    {% endif %}
                     </div>
                     {% include 'partials/_obs.html' %}
                 {% else %}
@@ -66,4 +80,8 @@
         </div>
     </div>
 </body>
+<script type="text/javascript">window.cofirmacao = function() { var isValid = confirm('Tem certeza que quer deletar essa tarefa ?');if (!isValid) { event.preventDefault(); }}</script>
 {% endblock %}
+
+
+
