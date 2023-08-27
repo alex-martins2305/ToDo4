@@ -13,7 +13,7 @@ def login(request):
             if email_user=="" or password== "":
                 messages.error(request, 'Para fazer Login é necessário digitar seu endereço de email ou nome de usuário.')
                 return redirect('login')
-            if User.objects.filter(username=email_user).exists():
+            if User.objects.filter(username=email_user.lower()).exists():
                 name=User.objects.filter(username=email_user).values_list('username', flat=True).get()
                 user=auth.authenticate(request, username=name, password=password)
                 if user is not None:
@@ -50,7 +50,7 @@ def signup (request):
                             messages.error(request, 'Já existe um usuário cadastrado com esse nome ou com esse email.')
                             return render (request, 'users/signup.html')
                         else:
-                            user=User.objects.create_user(username=nome, email=email, password=password1)
+                            user=User.objects.create_user(username=nome.lower(), email=email, password=password1)
                             user.save()
                             auth.login(request, user)
                             return redirect('dashboard')
